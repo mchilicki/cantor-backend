@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Chilicki.Cantor.Application\Chilicki.Cantor.Application.csproj" />
+    <ProjectReference Include="..\Chilicki.Cantor.Infrastructure\Chilicki.Cantor.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
