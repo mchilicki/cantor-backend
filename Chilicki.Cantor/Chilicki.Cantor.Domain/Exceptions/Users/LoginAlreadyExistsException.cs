@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Chilicki.Cantor.Domain.Exceptions.Users
 {
-    public class EmailAlreadyExistsException : Exception
+    public class LoginAlreadyExistsException : Exception
     {
     }
 }

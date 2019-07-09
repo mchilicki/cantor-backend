@@ -46,9 +46,12 @@ namespace Chilicki.Cantor.Application.CommandHandlers.Auth
 
         private async Task<bool> CanRegisterUser(UserToRegister userToRegister)
         {
-            var doesUserExists = await _userRepository.DoesUserAlreadyExists(userToRegister);
-            if (!doesUserExists)
-                throw new UserAlreadyExistsException();
+            var doesEmailExists = await _userRepository.DoesEmailAlreadyExists(userToRegister.Email);
+            if (doesEmailExists)
+                throw new EmailAlreadyExistsException();
+            var doesLoginExists = await _userRepository.DoesLoginAlreadyExists(userToRegister.Login);
+            if (doesLoginExists)
+                throw new LoginAlreadyExistsException();
             return true;
         }
     }

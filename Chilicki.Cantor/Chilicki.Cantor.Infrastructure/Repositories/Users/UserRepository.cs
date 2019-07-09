@@ -17,11 +17,28 @@ namespace Chilicki.Cantor.Infrastructure.Repositories.Users
         {
         }
 
-        public async Task<bool> DoesUserAlreadyExists(UserToRegister userToRegister)
+        public async Task<User> FindByLogin(string login)
         {
             return await _entities
-                .AllAsync(p => p.Email != userToRegister.Email &&
-                     p.Login != userToRegister.Login);
+                .FirstOrDefaultAsync(p => p.Login == login);
+        }
+
+        public async Task<User> FindByEmail(string email)
+        {
+            return await _entities
+                .FirstOrDefaultAsync(p => p.Email == email);
+        }
+
+        public async Task<bool> DoesEmailAlreadyExists(string email)
+        {
+            return await _entities
+                .AnyAsync(p => p.Email == email);
+        }
+
+        public async Task<bool> DoesLoginAlreadyExists(string login)
+        {
+            return await _entities
+                .AnyAsync(p => p.Login == login);
         }
     }
 }
