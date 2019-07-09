@@ -26,6 +26,8 @@ using Chilicki.Cantor.Domain.Entities.Base;
 using Chilicki.Cantor.Infrastructure.Repositories.Users.Base;
 using Chilicki.Cantor.Infrastructure.Repositories.Users;
 using AutoMapper;
+using Chilicki.Cantor.Domain.Factories.Users.Base;
+using Chilicki.Cantor.Domain.Factories.Users;
 
 namespace Chilicki.Cantor.WebAPI
 {
@@ -77,7 +79,7 @@ namespace Chilicki.Cantor.WebAPI
         private void ConfigureDatabase(IServiceCollection services)
         {
             var connectionString = Configuration.GetConnectionString("CantorDevelopment");
-            services.AddDbContext<CantorDatabaseContext>(options =>
+            services.AddDbContext<DbContext, CantorDatabaseContext>(options =>
                 options.UseSqlServer(connectionString, b => b.MigrationsAssembly("Chilicki.Cantor.Infrastructure"))
             );
         }
@@ -120,6 +122,7 @@ namespace Chilicki.Cantor.WebAPI
         private void RegisterDependencies(IServiceCollection services)
         {
             RegisterInfrastructureDependencies(services);
+            RegisterDomainDependencies(services);
             RegisterApplicationDependencies(services);
         }        
 
@@ -128,6 +131,11 @@ namespace Chilicki.Cantor.WebAPI
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IBaseRepository<BaseEntity>, BaseRepository<BaseEntity>>();
             services.AddTransient<IUserRepository, UserRepository>();
+        }
+
+        private void RegisterDomainDependencies(IServiceCollection services)
+        {
+            services.AddTransient<IUserFactory, UserFactory>();
         }
 
         private void RegisterApplicationDependencies(IServiceCollection services)

@@ -1,4 +1,5 @@
-﻿using Chilicki.Cantor.Domain.Aggregates.Users;
+﻿using AutoMapper;
+using Chilicki.Cantor.Domain.Aggregates.Users;
 using Chilicki.Cantor.Domain.Entities;
 using Chilicki.Cantor.Domain.Factories.Users.Base;
 using System;
@@ -9,16 +10,17 @@ namespace Chilicki.Cantor.Domain.Factories.Users
 {
     public class UserFactory : IUserFactory
     {
+        readonly IMapper _mapper;
+
+        public UserFactory(IMapper mapper)
+        {
+            _mapper = mapper;
+        }
+
         public User Create(UserToRegister userToRegister)
         {
-            return new User()
-            {
-                Email = userToRegister.Email,
-                FirstName = userToRegister.Email,
-                LastName = userToRegister.LastName,
-                Login = userToRegister.Login,
-                Password = userToRegister.Password,
-            };
+            var user = _mapper.Map<User>(userToRegister);
+            return user;
         }
     }
 }

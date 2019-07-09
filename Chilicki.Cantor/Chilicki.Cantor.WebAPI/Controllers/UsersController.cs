@@ -24,17 +24,17 @@ namespace Chilicki.Cantor.WebAPI.Controllers
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody]AuthenticateUserCommand command)
+        public async Task<IActionResult> Authenticate([FromBody]AuthenticateUserCommand command)
         {
-            var response = _mediator.Send(command);
+            var response = await _mediator.Send(command);
             return Ok(response);
         }
 
         [AllowAnonymous]
         [HttpPost("register")]
-        public IActionResult Register([FromBody]RegisterUserCommand command)
+        public async Task<IActionResult> Register([FromBody]RegisterUserCommand command)
         {
-            var response = _mediator.Send(command);
+            var response = await _mediator.Send(command);
             return Ok(response);
         }
     }

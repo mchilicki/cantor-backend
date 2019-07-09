@@ -16,6 +16,7 @@ namespace Chilicki.Cantor.WebAPI.Configurations
         public AutomapperProfile()
         {
             CreateMap<RegisterUserCommand, UserToRegister>();
+            CreateMap<UserToRegister, User>();
             CreateMap<User, UserDTO>();
         }
     }

@@ -5,6 +5,7 @@ using Chilicki.Cantor.Domain.Aggregates.Users;
 using Chilicki.Cantor.Domain.Exceptions.Users;
 using Chilicki.Cantor.Domain.Factories.Users.Base;
 using Chilicki.Cantor.Infrastructure.Repositories.Users.Base;
+using Chilicki.Cantor.Infrastructure.UnitsOfWork;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -19,15 +20,18 @@ namespace Chilicki.Cantor.Application.CommandHandlers.Auth
         readonly IMapper _mapper;
         readonly IUserRepository _userRepository;
         readonly IUserFactory _userFactory;
+        readonly IUnitOfWork _unitOfWork;
 
         public RegisterUserHandler(
             IMapper mapper,
             IUserRepository userRepository,
-            IUserFactory userFactory)
+            IUserFactory userFactory,
+            IUnitOfWork unitOfWork)
         {
             _mapper = mapper;
             _userRepository = userRepository;
             _userFactory = userFactory;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<UserDTO> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
@@ -36,6 +40,7 @@ namespace Chilicki.Cantor.Application.CommandHandlers.Auth
             await CanRegisterUser(userToRegister);
             var user = _userFactory.Create(userToRegister);
             var registeredUser = await _userRepository.AddAsync(user);
+            await _unitOfWork.SaveAsync();
             return _mapper.Map<UserDTO>(registeredUser);
         }
 
