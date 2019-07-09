@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Chilicki.Cantor.Domain.Aggregates.Users;
 using Chilicki.Cantor.Domain.Entities;
 using Chilicki.Cantor.Domain.Factories.Users.Base;
+using Chilicki.Cantor.Domain.ValueObjects.Users;
 using System;
 using System.Collections.Generic;
 using System.Text;

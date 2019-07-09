@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Chilicki.Cantor.WebAPI.Configurations
+namespace Chilicki.Cantor.Application.Configurations.Auth
 {
-    public class AppSettings
+    public class AuthenticationSettings
     {
         public string Secret { get; set; }
     }

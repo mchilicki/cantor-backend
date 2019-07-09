@@ -28,6 +28,12 @@ using Chilicki.Cantor.Infrastructure.Repositories.Users;
 using AutoMapper;
 using Chilicki.Cantor.Domain.Factories.Users.Base;
 using Chilicki.Cantor.Domain.Factories.Users;
+using Chilicki.Cantor.Domain.ValueObjects.Users;
+using Chilicki.Cantor.Domain.Services.Users;
+using Chilicki.Cantor.Domain.Services.Users.Base;
+using Chilicki.Cantor.Application.Configurations.Auth;
+using Chilicki.Cantor.Domain.Services.Auth.Base;
+using Chilicki.Cantor.Domain.Services.Auth;
 
 namespace Chilicki.Cantor.WebAPI
 {
@@ -80,16 +86,19 @@ namespace Chilicki.Cantor.WebAPI
         {
             var connectionString = Configuration.GetConnectionString("CantorDevelopment");
             services.AddDbContext<DbContext, CantorDatabaseContext>(options =>
-                options.UseSqlServer(connectionString, b => b.MigrationsAssembly("Chilicki.Cantor.Infrastructure"))
+                options.UseSqlServer(
+                    connectionString, 
+                    b => b.MigrationsAssembly(typeof(CantorDatabaseContext).Assembly.GetName().Name
+                ))
             );
         }
 
         private void ConfigureJWTAuthentication(IServiceCollection services)
         {
-            var appSettingsSection = Configuration.GetSection("AppSettings");
-            services.Configure<AppSettings>(appSettingsSection);
-            var appSettings = appSettingsSection.Get<AppSettings>();
-            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            var authenticationSettingsSection = Configuration.GetSection(nameof(AuthenticationSettings));
+            services.Configure<AuthenticationSettings>(authenticationSettingsSection);
+            var authenticationSettings = authenticationSettingsSection.Get<AuthenticationSettings>();
+            var key = Encoding.ASCII.GetBytes(authenticationSettings.Secret);
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -136,11 +145,14 @@ namespace Chilicki.Cantor.WebAPI
         private void RegisterDomainDependencies(IServiceCollection services)
         {
             services.AddTransient<IUserFactory, UserFactory>();
+            services.AddTransient<IUserTokenFactory, UserTokenFactory>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IUserTokenGenerator, UserTokenGenerator>();
         }
 
         private void RegisterApplicationDependencies(IServiceCollection services)
         {
-            services.AddTransient<IRequestHandler<AuthenticateUserCommand, string>, AuthenticateUserHandler>();
+            services.AddTransient<IRequestHandler<AuthenticateUserCommand, UserToken>, AuthenticateUserHandler>();
             services.AddTransient<IRequestHandler<RegisterUserCommand, UserDTO>, RegisterUserHandler>();
         }
     }
