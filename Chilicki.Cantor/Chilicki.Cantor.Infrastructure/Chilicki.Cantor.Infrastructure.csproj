@@ -11,6 +11,8 @@
     <Compile Remove="Migrations\20190709140442_AddUser.cs" />
     <Compile Remove="Migrations\20190709140511_AddUser.cs" />
     <Compile Remove="Migrations\20190709140744_AddUser.cs" />
+    <Compile Remove="Migrations\20190709215641_AddCantorsWalletsAndCurrencies.cs" />
+    <Compile Remove="Migrations\20190709220130_AddCantorsWalletsAndCurrencies.cs" />
   </ItemGroup>
 
   <ItemGroup>

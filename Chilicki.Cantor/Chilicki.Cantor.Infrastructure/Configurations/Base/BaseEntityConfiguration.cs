@@ -18,10 +18,11 @@ namespace Chilicki.Cantor.Infrastructure.Configurations.Base
                 .HasDefaultValueSql("newsequentialid()");            
             builder
                 .Property(p => p.RowVersion)
+                .IsRequired()
                 .IsRowVersion();
             ConfigureEntity(builder);
         }
 
-        public abstract void ConfigureEntity<TConfiguredEntity>(EntityTypeBuilder<TConfiguredEntity> builder) where TConfiguredEntity : BaseEntity;
+        public abstract void ConfigureEntity(EntityTypeBuilder<TEntity> builder);
     }
 }

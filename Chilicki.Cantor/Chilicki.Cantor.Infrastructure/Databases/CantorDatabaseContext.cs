@@ -19,6 +19,10 @@ namespace Chilicki.Cantor.Infrastructure.Databases
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new CantorCurrencyConfiguration());
+            modelBuilder.ApplyConfiguration(new CantorWalletConfiguration());
+            modelBuilder.ApplyConfiguration(new CurrencyConfiguration());
+            modelBuilder.ApplyConfiguration(new WalletCurrencyConfiguration());
         }
     }
 }

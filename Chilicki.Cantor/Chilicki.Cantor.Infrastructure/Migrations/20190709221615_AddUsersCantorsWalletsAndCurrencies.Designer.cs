@@ -4,14 +4,16 @@ using Chilicki.Cantor.Infrastructure.Databases;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Chilicki.Cantor.Infrastructure.Migrations
 {
     [DbContext(typeof(CantorDatabaseContext))]
-    partial class CantorDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20190709221615_AddUsersCantorsWalletsAndCurrencies")]
+    partial class AddUsersCantorsWalletsAndCurrencies
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
