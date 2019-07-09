@@ -5,11 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="QueryHandlers\" />
     <Folder Include="Queries\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.1.1" />
     <PackageReference Include="MediatR" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Chilicki.Cantor.Domain\Chilicki.Cantor.Domain.csproj" />
+    <ProjectReference Include="..\Chilicki.Cantor.Infrastructure\Chilicki.Cantor.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

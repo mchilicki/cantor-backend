@@ -6,11 +6,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Chilicki.Cantor.Application.RequestHandlers.Auth
+namespace Chilicki.Cantor.Application.CommandHandlers.Auth
 {
-    public class UserAuthenticateHandler : IRequestHandler<UserAuthenticateCommand, string>
+    public class AuthenticateUserHandler : IRequestHandler<AuthenticateUserCommand, string>
     {
-        public Task<string> Handle(UserAuthenticateCommand request, CancellationToken cancellationToken)
+        public Task<string> Handle(AuthenticateUserCommand request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

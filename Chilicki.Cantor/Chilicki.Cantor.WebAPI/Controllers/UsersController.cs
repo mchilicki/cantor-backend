@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Chilicki.Cantor.WebAPI.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -22,9 +22,17 @@ namespace Chilicki.Cantor.WebAPI.Controllers
             _mediator = mediator;
         }
 
-        //[AllowAnonymous]
+        [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody]UserAuthenticateCommand command)
+        public IActionResult Authenticate([FromBody]AuthenticateUserCommand command)
+        {
+            var response = _mediator.Send(command);
+            return Ok(response);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public IActionResult Register([FromBody]RegisterUserCommand command)
         {
             var response = _mediator.Send(command);
             return Ok(response);
