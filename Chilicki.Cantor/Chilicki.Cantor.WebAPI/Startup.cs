@@ -34,6 +34,13 @@ using Chilicki.Cantor.Domain.Services.Users.Base;
 using Chilicki.Cantor.Application.Configurations.Auth;
 using Chilicki.Cantor.Domain.Services.Auth.Base;
 using Chilicki.Cantor.Domain.Services.Auth;
+using Chilicki.Cantor.WebAPI.Configurations.Automapper;
+using Chilicki.Cantor.Infrastructure.Repositories.Cantors;
+using Chilicki.Cantor.Infrastructure.Repositories.Cantors.Base;
+using Chilicki.Cantor.Infrastructure.Repositories.Currencies.Base;
+using Chilicki.Cantor.Infrastructure.Repositories.Currencies;
+using Chilicki.Cantor.Infrastructure.Repositories.Wallets;
+using Chilicki.Cantor.Infrastructure.Repositories.Wallets.Base;
 
 namespace Chilicki.Cantor.WebAPI
 {
@@ -140,6 +147,10 @@ namespace Chilicki.Cantor.WebAPI
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IBaseRepository<BaseEntity>, BaseRepository<BaseEntity>>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<ICantorCurrencyRepository, CantorCurrencyRepository>();
+            services.AddTransient<ICantorWalletRepository, CantorWalletRepository>();
+            services.AddTransient<ICurrencyRepository, CurrencyRepository>();
+            services.AddTransient<IWalletCurrencyRepository, WalletCurrencyRepository>();
         }
 
         private void RegisterDomainDependencies(IServiceCollection services)
