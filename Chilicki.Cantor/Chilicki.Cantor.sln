@@ -33,11 +33,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chilicki.Cantor.Application
 		{9A2AFFDA-1B4D-4A59-831D-93B561226A5C} = {9A2AFFDA-1B4D-4A59-831D-93B561226A5C}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chilicki.Cantor.WebAPI", "Chilicki.Cantor.WebAPI\Chilicki.Cantor.WebAPI.csproj", "{474DDD83-BF6A-45C5-91F6-D4920A22A000}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chilicki.Cantor.WebAPI", "Chilicki.Cantor.WebAPI\Chilicki.Cantor.WebAPI.csproj", "{474DDD83-BF6A-45C5-91F6-D4920A22A000}"
 	ProjectSection(ProjectDependencies) = postProject
 		{78E7D511-2288-4385-AB32-071D669FAA7E} = {78E7D511-2288-4385-AB32-071D669FAA7E}
 		{DD98C1BD-5305-4C56-924F-700B6A5A28AC} = {DD98C1BD-5305-4C56-924F-700B6A5A28AC}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chilicki.Cantor.CurrencyUpdater", "Chilicki.Cantor.CurrencyUpdater\Chilicki.Cantor.CurrencyUpdater.csproj", "{7CB1A458-6549-46FB-BCB4-FEE12BF75030}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +67,10 @@ Global
 		{474DDD83-BF6A-45C5-91F6-D4920A22A000}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{474DDD83-BF6A-45C5-91F6-D4920A22A000}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{474DDD83-BF6A-45C5-91F6-D4920A22A000}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CB1A458-6549-46FB-BCB4-FEE12BF75030}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CB1A458-6549-46FB-BCB4-FEE12BF75030}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CB1A458-6549-46FB-BCB4-FEE12BF75030}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CB1A458-6549-46FB-BCB4-FEE12BF75030}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +81,7 @@ Global
 		{70BAF799-D69D-4EBB-AE11-ADB667C7CA50} = {58C3CDB0-94AB-4D70-B801-51DBFBBB5E41}
 		{78E7D511-2288-4385-AB32-071D669FAA7E} = {C4309A5E-BE06-4261-801E-521771E84079}
 		{474DDD83-BF6A-45C5-91F6-D4920A22A000} = {A0D2025F-629A-4D5C-9E91-CA2B02AAB7DB}
+		{7CB1A458-6549-46FB-BCB4-FEE12BF75030} = {A0D2025F-629A-4D5C-9E91-CA2B02AAB7DB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3C5A6FB3-5B21-41E6-9883-F6CE4B4EFC05}
