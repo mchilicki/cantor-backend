@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,7 +19,12 @@ namespace Chilicki.Cantor.Infrastructure.Repositories.Base
             _entities = _context.Set<TEntity>();
         }
 
-        public async Task<TEntity> Find(params object[] keyValues)
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        {
+            return await _entities.ToListAsync();
+        }
+
+        public async Task<TEntity> FindAsync(params object[] keyValues)
         {
             return await _entities.FindAsync(keyValues);
         }
@@ -27,6 +33,16 @@ namespace Chilicki.Cantor.Infrastructure.Repositories.Base
         {
             var entry = await _entities.AddAsync(entity);
             return entry.Entity;
+        }
+
+        public async Task AddRangeAsync(IEnumerable<TEntity> entities)
+        {
+            await _entities.AddRangeAsync(entities);
+        }
+
+        public async Task<int> GetCountAsync()
+        {
+            return await _entities.CountAsync();
         }
     }
 }

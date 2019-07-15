@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace Chilicki.Cantor.Infrastructure.Repositories.Cantors
 {
@@ -12,6 +14,12 @@ namespace Chilicki.Cantor.Infrastructure.Repositories.Cantors
     {
         public CantorWalletRepository(DbContext context) : base(context)
         {
+        }
+
+        public async Task<CantorWallet> GetCantor()
+        {
+            return await _entities
+                .FirstOrDefaultAsync();
         }
     }
 }

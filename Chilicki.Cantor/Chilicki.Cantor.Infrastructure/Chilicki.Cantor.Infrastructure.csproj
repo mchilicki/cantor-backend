@@ -13,10 +13,13 @@
     <Compile Remove="Migrations\20190709140744_AddUser.cs" />
     <Compile Remove="Migrations\20190709215641_AddCantorsWalletsAndCurrencies.cs" />
     <Compile Remove="Migrations\20190709220130_AddCantorsWalletsAndCurrencies.cs" />
+    <Compile Remove="Migrations\20190713165641_InsertDefaultCantor.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="RestSharp" Version="106.6.10" />
   </ItemGroup>
 
   <ItemGroup>

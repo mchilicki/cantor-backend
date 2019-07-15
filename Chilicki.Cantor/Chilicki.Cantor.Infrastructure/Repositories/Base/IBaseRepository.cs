@@ -8,7 +8,10 @@ namespace Chilicki.Cantor.Infrastructure.Repositories.Base
 {
     public interface IBaseRepository<TEntity> where TEntity : BaseEntity
     {
-        Task<TEntity> Find(params object[] keyValuesd);
+        Task<IEnumerable<TEntity>> GetAllAsync();
+        Task<TEntity> FindAsync(params object[] keyValuesd);
         Task<TEntity> AddAsync(TEntity entity);
+        Task AddRangeAsync(IEnumerable<TEntity> entities);
+        Task<int> GetCountAsync();
     }
 }

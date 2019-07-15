@@ -13,7 +13,7 @@ namespace Chilicki.Cantor.Infrastructure.Configurations
         public override void ConfigureEntity(EntityTypeBuilder<CantorCurrency> builder)
         {
             builder
-                .HasOne(p => p.Cantor)
+                .HasOne(p => p.CantorWallet)
                 .WithMany(p => p.CantorCurrencies)
                 .HasForeignKey("CantorId")
                 .IsRequired()

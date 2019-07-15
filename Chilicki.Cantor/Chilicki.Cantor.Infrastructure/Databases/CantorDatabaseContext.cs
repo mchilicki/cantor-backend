@@ -3,14 +3,13 @@ using Chilicki.Cantor.Infrastructure.Configurations;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Chilicki.Cantor.Infrastructure.Databases
 {
     public class CantorDatabaseContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
-
         public CantorDatabaseContext(DbContextOptions options) : base(options)
         {
             
