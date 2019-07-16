@@ -6,9 +6,9 @@ namespace Chilicki.Cantor.Application.CommandHandlers.CurrencyUpdaters.Base
 {
     public interface ICurrencyUpdater
     {
-        Task InitializeAndUpdateCurrencies();
+        Task<bool> InitializeAndUpdateCurrencies();
         Task InitializeCurrencies();
-        Task UpdateCurrencies();
-        Task<bool> AreCurrenciesInitialized();
+        Task<bool> UpdateCurrencies();
+        Task<bool> AreCurrenciesNotInitialized();
     }
 }

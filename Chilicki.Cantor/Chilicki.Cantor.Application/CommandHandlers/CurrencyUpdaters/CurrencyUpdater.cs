@@ -42,13 +42,14 @@ namespace Chilicki.Cantor.Application.CommandHandlers.CurrencyUpdaters
             _initializeCurrenciesFactory = initializeCurrenciesFactory;
         }
 
-        public async Task InitializeAndUpdateCurrencies()
+        public async Task<bool> InitializeAndUpdateCurrencies()
         {
-            if (!await AreCurrenciesInitialized())
+            if (await AreCurrenciesNotInitialized())
             {
                 await InitializeCurrencies();
             }
-            await UpdateCurrencies();
+            bool wereCurrenciesUpdated = await UpdateCurrencies();
+            return wereCurrenciesUpdated;
         }
 
         public async Task InitializeCurrencies()
@@ -62,20 +63,28 @@ namespace Chilicki.Cantor.Application.CommandHandlers.CurrencyUpdaters
             await _unitOfWork.SaveAsync();
         }
 
-        public async Task UpdateCurrencies()
+        public async Task<bool> UpdateCurrencies()
         {
             var updatedCurrencies = _currencyUpdaterRestClient.GetUpdatedCurrencies();
             var cantorWallet = await _cantorWalletRepository.GetCantor();
+            if (!ShouldUpdateCurrencies(cantorWallet, updatedCurrencies))
+                return false;
             var allCurrencies = await _currencyRepository.GetAllAsync();
             var remainingCurrencies = _currencyUpdateService.UpdateCurrencies(cantorWallet, allCurrencies, updatedCurrencies);
             await _currencyRepository.AddRangeAsync(remainingCurrencies.Items);
             await _unitOfWork.SaveAsync();
+            return true;
         }
 
-        public async Task<bool> AreCurrenciesInitialized()
+        public async Task<bool> AreCurrenciesNotInitialized()
         {
             var cantorWalletsCount = await _cantorWalletRepository.GetCountAsync();
-            return cantorWalletsCount > 0;
+            return cantorWalletsCount == 0;
+        }
+
+        private bool ShouldUpdateCurrencies(CantorWallet cantorWallet, UpdatedCurrencies updatedCurrencies)
+        {
+            return cantorWallet.PublicationDate != updatedCurrencies.PublicationDate;
         }
     }
 }

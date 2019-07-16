@@ -29,14 +29,38 @@ namespace Chilicki.Cantor.CurrencyUpdater
         {
             var serviceProvider = CreateDependencyInjection();
             var currencyUpdater = serviceProvider.GetService<ICurrencyUpdater>();
-            try
+            int waitingTimeInMiliseconds = 1000;
+            await UpdateInLoop(currencyUpdater, waitingTimeInMiliseconds);
+        }
+
+        static async Task UpdateInLoop(ICurrencyUpdater currencyUpdater, int waitingTimeInMiliseconds)
+        {
+            await Task.Run(async () =>
             {
-                await currencyUpdater.InitializeAndUpdateCurrencies();
-            }
-            catch (Exception exception)
-            {
-                Console.Write(exception.Message);
-            }            
+                while (true)
+                {
+                    bool wereCurrenciesUpdated = false;
+                    try
+                    {
+                        Console.WriteLine("Checking for updated currencies");
+                        wereCurrenciesUpdated = await currencyUpdater.InitializeAndUpdateCurrencies();
+                    }
+                    catch (Exception exception)
+                    {
+                        Console.Write(exception.Message);
+                    }
+                    LogUpdatingResult(wereCurrenciesUpdated);
+                    await Task.Delay(waitingTimeInMiliseconds);
+                }
+            });                       
+        }
+
+        static void LogUpdatingResult(bool wereCurrenciesUpdated)
+        {
+            if (wereCurrenciesUpdated)
+                Console.WriteLine("Currencies updated");
+            else
+                Console.WriteLine("Currencies were not updated");
         }
 
         static ServiceProvider CreateDependencyInjection()
