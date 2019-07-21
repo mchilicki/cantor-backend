@@ -11,7 +11,7 @@ namespace Chilicki.Cantor.Infrastructure.Migrations
                 name: "CantorWallet",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
+                    Id = table.Column<Guid>(nullable: false, defaultValueSql: "newid()"),
                     RowVersion = table.Column<byte[]>(rowVersion: true, nullable: false),
                     PublicationDate = table.Column<DateTime>(nullable: false)
                 },
@@ -24,7 +24,7 @@ namespace Chilicki.Cantor.Infrastructure.Migrations
                 name: "Currency",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
+                    Id = table.Column<Guid>(nullable: false, defaultValueSql: "newid()"),
                     RowVersion = table.Column<byte[]>(rowVersion: true, nullable: false),
                     Name = table.Column<string>(nullable: false),
                     Code = table.Column<string>(nullable: false),
@@ -39,10 +39,10 @@ namespace Chilicki.Cantor.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "User",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
+                    Id = table.Column<Guid>(nullable: false, defaultValueSql: "newid()"),
                     RowVersion = table.Column<byte[]>(rowVersion: true, nullable: false),
                     Login = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
@@ -54,14 +54,14 @@ namespace Chilicki.Cantor.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_User", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "CantorCurrency",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
+                    Id = table.Column<Guid>(nullable: false, defaultValueSql: "newid()"),
                     RowVersion = table.Column<byte[]>(rowVersion: true, nullable: false),
                     CantorId = table.Column<Guid>(nullable: false),
                     CurrencyId = table.Column<Guid>(nullable: false),
@@ -88,7 +88,7 @@ namespace Chilicki.Cantor.Infrastructure.Migrations
                 name: "WalletCurrency",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
+                    Id = table.Column<Guid>(nullable: false, defaultValueSql: "newid()"),
                     RowVersion = table.Column<byte[]>(rowVersion: true, nullable: false),
                     OwnerId = table.Column<Guid>(nullable: false),
                     CurrencyId = table.Column<Guid>(nullable: false),
@@ -105,9 +105,9 @@ namespace Chilicki.Cantor.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_WalletCurrency_Users_OwnerId",
+                        name: "FK_WalletCurrency_User_OwnerId",
                         column: x => x.OwnerId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -148,7 +148,7 @@ namespace Chilicki.Cantor.Infrastructure.Migrations
                 name: "Currency");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "User");
         }
     }
 }

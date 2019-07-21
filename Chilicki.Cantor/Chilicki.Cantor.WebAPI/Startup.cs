@@ -42,6 +42,7 @@ using Chilicki.Cantor.Infrastructure.Repositories.Currencies;
 using Chilicki.Cantor.Infrastructure.Repositories.Wallets;
 using Chilicki.Cantor.Infrastructure.Repositories.Wallets.Base;
 using Microsoft.AspNetCore.Http;
+using Chilicki.Cantor.WebAPI.Controllers.Base;
 
 namespace Chilicki.Cantor.WebAPI
 {
@@ -77,6 +78,7 @@ namespace Chilicki.Cantor.WebAPI
 
             app.UseHttpsRedirection();
             app.UseAuthentication();
+            app.UseMiddleware(typeof(ErrorMiddlewareHandler));
             app.UseMvc();
         }
 

@@ -15,7 +15,7 @@ namespace Chilicki.Cantor.Infrastructure.Configurations.Base
                 .HasKey(p => p.Id);
             builder
                 .Property(p => p.Id)
-                .HasDefaultValueSql("newsequentialid()");            
+                .HasDefaultValueSql("newid()");            
             builder
                 .Property(p => p.RowVersion)
                 .IsRequired()

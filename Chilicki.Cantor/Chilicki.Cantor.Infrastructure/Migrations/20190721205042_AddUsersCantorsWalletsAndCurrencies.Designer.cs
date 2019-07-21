@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Chilicki.Cantor.Infrastructure.Migrations
 {
     [DbContext(typeof(CantorDatabaseContext))]
-    [Migration("20190709221615_AddUsersCantorsWalletsAndCurrencies")]
+    [Migration("20190721205042_AddUsersCantorsWalletsAndCurrencies")]
     partial class AddUsersCantorsWalletsAndCurrencies
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace Chilicki.Cantor.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("newsequentialid()");
+                        .HasDefaultValueSql("newid()");
 
                     b.Property<int>("Amount");
 
@@ -51,7 +51,7 @@ namespace Chilicki.Cantor.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("newsequentialid()");
+                        .HasDefaultValueSql("newid()");
 
                     b.Property<DateTime>("PublicationDate");
 
@@ -69,7 +69,7 @@ namespace Chilicki.Cantor.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("newsequentialid()");
+                        .HasDefaultValueSql("newid()");
 
                     b.Property<decimal>("AveragePrice");
 
@@ -99,7 +99,7 @@ namespace Chilicki.Cantor.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("newsequentialid()");
+                        .HasDefaultValueSql("newid()");
 
                     b.Property<string>("Email");
 
@@ -122,14 +122,14 @@ namespace Chilicki.Cantor.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("Chilicki.Cantor.Domain.Entities.WalletCurrency", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("newsequentialid()");
+                        .HasDefaultValueSql("newid()");
 
                     b.Property<int>("Amount");
 
@@ -155,7 +155,7 @@ namespace Chilicki.Cantor.Infrastructure.Migrations
 
             modelBuilder.Entity("Chilicki.Cantor.Domain.Entities.CantorCurrency", b =>
                 {
-                    b.HasOne("Chilicki.Cantor.Domain.Entities.CantorWallet", "Cantor")
+                    b.HasOne("Chilicki.Cantor.Domain.Entities.CantorWallet", "CantorWallet")
                         .WithMany("CantorCurrencies")
                         .HasForeignKey("CantorId")
                         .OnDelete(DeleteBehavior.Cascade);
