@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Chilicki.Cantor.Domain.Aggregates
+namespace Chilicki.Cantor.Domain.Aggregates.Currencies
 {
     public class UpdatedCurrencies
     {

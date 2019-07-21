@@ -41,6 +41,7 @@ using Chilicki.Cantor.Infrastructure.Repositories.Currencies.Base;
 using Chilicki.Cantor.Infrastructure.Repositories.Currencies;
 using Chilicki.Cantor.Infrastructure.Repositories.Wallets;
 using Chilicki.Cantor.Infrastructure.Repositories.Wallets.Base;
+using Microsoft.AspNetCore.Http;
 
 namespace Chilicki.Cantor.WebAPI
 {
@@ -165,6 +166,7 @@ namespace Chilicki.Cantor.WebAPI
         {
             services.AddTransient<IRequestHandler<AuthenticateUserCommand, UserToken>, AuthenticateUserHandler>();
             services.AddTransient<IRequestHandler<RegisterUserCommand, UserDTO>, RegisterUserHandler>();
+            services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
         }
     }
 }

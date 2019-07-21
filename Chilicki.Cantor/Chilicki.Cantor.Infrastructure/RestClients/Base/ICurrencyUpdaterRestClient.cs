@@ -1,4 +1,5 @@
 ﻿using Chilicki.Cantor.Domain.Aggregates;
+using Chilicki.Cantor.Domain.Aggregates.Currencies;
 using System;
 using System.Collections.Generic;
 

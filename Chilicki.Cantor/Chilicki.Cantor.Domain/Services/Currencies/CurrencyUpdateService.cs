@@ -1,4 +1,5 @@
 ﻿using Chilicki.Cantor.Domain.Aggregates;
+using Chilicki.Cantor.Domain.Aggregates.Currencies;
 using Chilicki.Cantor.Domain.Entities;
 using Chilicki.Cantor.Domain.Exceptions.Currencies;
 using Chilicki.Cantor.Domain.Services.Currencies.Base;

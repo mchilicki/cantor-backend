@@ -6,6 +6,7 @@ using Chilicki.Cantor.Domain.Entities;
 using Chilicki.Cantor.Domain.Aggregates;
 using Chilicki.Cantor.Domain.Exceptions.Currencies;
 using Chilicki.Cantor.Infrastructure.RestClients.Helpers;
+using Chilicki.Cantor.Domain.Aggregates.Currencies;
 
 namespace Chilicki.Cantor.Infrastructure.RestClients
 {

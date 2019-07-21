@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Chilicki.Cantor.Application.Commands.Auth;
+using Chilicki.Cantor.Application.Commands.Charges;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -16,10 +17,14 @@ namespace Chilicki.Cantor.WebAPI.Controllers
     public class UsersController : ControllerBase
     {
         readonly IMediator _mediator;
+        readonly IHttpContextAccessor _httpContext;
 
-        public UsersController(IMediator mediator)
+        public UsersController(
+            IMediator mediator,
+            IHttpContextAccessor httpContext)
         {
             _mediator = mediator;
+            _httpContext = httpContext;
         }
 
         [AllowAnonymous]
@@ -34,6 +39,14 @@ namespace Chilicki.Cantor.WebAPI.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody]RegisterUserCommand command)
         {
+            var response = await _mediator.Send(command);
+            return Ok(response);
+        }
+
+        [HttpPost("charge")]
+        public async Task<IActionResult> ChargeAccount([FromBody]ChargeAccountCommand command)
+        {
+            string userName = _httpContext.HttpContext.User.Identity.Name;
             var response = await _mediator.Send(command);
             return Ok(response);
         }

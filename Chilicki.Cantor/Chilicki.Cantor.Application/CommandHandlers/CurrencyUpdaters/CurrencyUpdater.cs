@@ -1,5 +1,6 @@
 ﻿using Chilicki.Cantor.Application.CommandHandlers.CurrencyUpdaters.Base;
 using Chilicki.Cantor.Domain.Aggregates;
+using Chilicki.Cantor.Domain.Aggregates.Currencies;
 using Chilicki.Cantor.Domain.Entities;
 using Chilicki.Cantor.Domain.Factories.Initializing.Base;
 using Chilicki.Cantor.Domain.Services.Currencies.Base;

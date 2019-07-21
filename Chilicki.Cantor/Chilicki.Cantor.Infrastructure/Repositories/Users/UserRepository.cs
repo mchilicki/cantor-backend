@@ -24,6 +24,12 @@ namespace Chilicki.Cantor.Infrastructure.Repositories.Users
                     p.Email == userCredentials.LoginOrEmail) && p.Password == userCredentials.Password);
         }
 
+        public async Task<User> FindByLoginOrEmail(string loginOrEmail)
+        {
+            return await _entities
+                .FirstOrDefaultAsync(p => p.Login == loginOrEmail || p.Email == loginOrEmail);
+        }
+
         public async Task<User> FindByLogin(string login)
         {
             return await _entities
