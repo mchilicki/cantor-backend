@@ -17,14 +17,10 @@ namespace Chilicki.Cantor.WebAPI.Controllers
     public class UsersController : ControllerBase
     {
         readonly IMediator _mediator;
-        readonly IHttpContextAccessor _httpContext;
 
-        public UsersController(
-            IMediator mediator,
-            IHttpContextAccessor httpContext)
+        public UsersController(IMediator mediator)
         {
             _mediator = mediator;
-            _httpContext = httpContext;
         }
 
         [AllowAnonymous]
@@ -46,7 +42,6 @@ namespace Chilicki.Cantor.WebAPI.Controllers
         [HttpPost("charge")]
         public async Task<IActionResult> ChargeAccount([FromBody]ChargeAccountCommand command)
         {
-            string userName = _httpContext.HttpContext.User.Identity.Name;
             var response = await _mediator.Send(command);
             return Ok(response);
         }

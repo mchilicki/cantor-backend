@@ -38,8 +38,8 @@ namespace Chilicki.Cantor.Application.CommandHandlers.Charges
 
         public async Task<UserDTO> Handle(ChargeAccountCommand request, CancellationToken cancellationToken)
         {
-            var user = await _userRepository.FindByLoginOrEmail(_httpContext.HttpContext.User.Identity.Name);
-            user = _chargeAccountService.ChargeUserAccount(user, request.Ammount);
+            var user = await _userRepository.FindAsync(_httpContext.HttpContext.User.Identity.Name);
+            user = _chargeAccountService.ChargeUserAccount(user, request.Amount);
             await _unitOfWork.SaveAsync();
             var userDto = _mapper.Map<UserDTO>(user);
             return userDto;

@@ -24,6 +24,12 @@ namespace Chilicki.Cantor.Infrastructure.Repositories.Base
             return await _entities.ToListAsync();
         }
 
+        public async Task<TEntity> FindAsync(string key)
+        {
+            var keyGuid = Guid.Parse(key);
+            return await _entities.FindAsync(keyGuid);
+        }
+
         public async Task<TEntity> FindAsync(params object[] keyValues)
         {
             return await _entities.FindAsync(keyValues);

@@ -43,6 +43,10 @@ using Chilicki.Cantor.Infrastructure.Repositories.Wallets;
 using Chilicki.Cantor.Infrastructure.Repositories.Wallets.Base;
 using Microsoft.AspNetCore.Http;
 using Chilicki.Cantor.WebAPI.Controllers.Base;
+using Chilicki.Cantor.Application.CommandHandlers.Charges;
+using Chilicki.Cantor.Application.Commands.Charges;
+using Chilicki.Cantor.Domain.Services.Charges;
+using Chilicki.Cantor.Domain.Services.Charges.Base;
 
 namespace Chilicki.Cantor.WebAPI
 {
@@ -162,12 +166,14 @@ namespace Chilicki.Cantor.WebAPI
             services.AddTransient<IUserTokenFactory, UserTokenFactory>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IUserTokenGenerator, UserTokenGenerator>();
+            services.AddTransient<IChargeAccountService, ChargeAccountService>();
         }
 
         private void RegisterApplicationDependencies(IServiceCollection services)
         {
             services.AddTransient<IRequestHandler<AuthenticateUserCommand, UserToken>, AuthenticateUserHandler>();
             services.AddTransient<IRequestHandler<RegisterUserCommand, UserDTO>, RegisterUserHandler>();
+            services.AddTransient<IRequestHandler<ChargeAccountCommand, UserDTO>, ChargeAccountHandler>();
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
         }
     }
