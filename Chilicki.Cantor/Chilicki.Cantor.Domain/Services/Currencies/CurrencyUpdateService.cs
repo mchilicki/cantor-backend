@@ -1,7 +1,7 @@
 ﻿using Chilicki.Cantor.Domain.Aggregates;
 using Chilicki.Cantor.Domain.Aggregates.Currencies;
 using Chilicki.Cantor.Domain.Entities;
-using Chilicki.Cantor.Domain.Exceptions.Currencies;
+using Chilicki.Cantor.Domain.Helpers.Exceptions.Currencies;
 using Chilicki.Cantor.Domain.Services.Currencies.Base;
 using System;
 using System.Collections.Generic;
@@ -48,7 +48,7 @@ namespace Chilicki.Cantor.Domain.Services.Currencies
         private bool ValidateCantorWaller(CantorWallet cantorWallet)
         {
             if (cantorWallet == null)
-                throw new CannotUpdateCurrenciesException();
+                throw new CannotUpdateCurrenciesException("Can't connect to remote server to update currencies");
             return true;
         }
     }

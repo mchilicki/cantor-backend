@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Chilicki.Cantor.Application.Commands.Auth;
 using Chilicki.Cantor.Application.DTOs;
-using Chilicki.Cantor.Domain.Exceptions.Users;
 using Chilicki.Cantor.Domain.Factories.Users.Base;
+using Chilicki.Cantor.Domain.Helpers.Exceptions.Users;
 using Chilicki.Cantor.Domain.ValueObjects.Users;
 using Chilicki.Cantor.Infrastructure.Repositories.Users.Base;
 using Chilicki.Cantor.Infrastructure.UnitsOfWork;

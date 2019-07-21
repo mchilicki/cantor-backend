@@ -1,4 +1,5 @@
 ﻿using Chilicki.Cantor.Application.DTOs.Errors;
+using Chilicki.Cantor.Domain.Helpers.Exceptions.Base;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
@@ -29,15 +30,17 @@ namespace Chilicki.Cantor.WebAPI.Controllers.Base
             }
         }
 
-        private static Task HandleExceptionAsync(HttpContext context, Exception ex)
+        private static Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
-            var code = HttpStatusCode.InternalServerError; 
+            var code = HttpStatusCode.InternalServerError;
+            if (exception is UnathorizedException) code = HttpStatusCode.Unauthorized;
+            else if (exception is BadRequestException) code = HttpStatusCode.BadRequest;
 
-            //if (ex is MyNotFoundException) code = HttpStatusCode.NotFound;
-            //else if (ex is MyUnauthorizedException) code = HttpStatusCode.Unauthorized;
-            //else if (ex is MyException) code = HttpStatusCode.BadRequest;
-
-            var result = JsonConvert.SerializeObject(new ErrorDTO { Error = ex.Message });
+            var errorDto = new ErrorDTO()
+            {
+                Error = exception.Message
+            };
+            var result = JsonConvert.SerializeObject(errorDto);
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)code;
             return context.Response.WriteAsync(result);

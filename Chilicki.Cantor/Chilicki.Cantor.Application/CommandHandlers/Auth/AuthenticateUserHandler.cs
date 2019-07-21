@@ -2,7 +2,7 @@
 using Chilicki.Cantor.Application.Commands.Auth;
 using Chilicki.Cantor.Application.Configurations.Auth;
 using Chilicki.Cantor.Domain.Entities;
-using Chilicki.Cantor.Domain.Exceptions.Users;
+using Chilicki.Cantor.Domain.Helpers.Exceptions.Users;
 using Chilicki.Cantor.Domain.Services.Users.Base;
 using Chilicki.Cantor.Domain.ValueObjects.Users;
 using Chilicki.Cantor.Infrastructure.Repositories.Users.Base;
