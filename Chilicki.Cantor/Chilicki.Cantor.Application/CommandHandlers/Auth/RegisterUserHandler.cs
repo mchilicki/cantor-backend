@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Chilicki.Cantor.Application.CommandHandlers.Auth
 {
-    public class RegisterUserHandler : IRequestHandler<RegisterUserCommand, UserDTO>
+    public class RegisterUserHandler : IRequestHandler<RegisterUserCommand, UserDto>
     {
         readonly IMapper _mapper;
         readonly IUserRepository _userRepository;
@@ -34,14 +34,14 @@ namespace Chilicki.Cantor.Application.CommandHandlers.Auth
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<UserDTO> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+        public async Task<UserDto> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
             var userToRegister = _mapper.Map<UserToRegister>(request);
             await CanRegisterUser(userToRegister);
             var user = _userFactory.Create(userToRegister);
             var registeredUser = await _userRepository.AddAsync(user);
             await _unitOfWork.SaveAsync();
-            return _mapper.Map<UserDTO>(registeredUser);
+            return _mapper.Map<UserDto>(registeredUser);
         }
 
         private async Task<bool> CanRegisterUser(UserToRegister userToRegister)

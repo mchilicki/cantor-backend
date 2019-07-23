@@ -47,6 +47,9 @@ using Chilicki.Cantor.Application.CommandHandlers.Charges;
 using Chilicki.Cantor.Application.Commands.Charges;
 using Chilicki.Cantor.Domain.Services.Charges;
 using Chilicki.Cantor.Domain.Services.Charges.Base;
+using Chilicki.Cantor.Application.Queries;
+using Chilicki.Cantor.Application.QueryHandlers;
+using Chilicki.Cantor.Application.DTOs.Currencies;
 
 namespace Chilicki.Cantor.WebAPI
 {
@@ -172,8 +175,9 @@ namespace Chilicki.Cantor.WebAPI
         private void RegisterApplicationDependencies(IServiceCollection services)
         {
             services.AddTransient<IRequestHandler<AuthenticateUserCommand, UserToken>, AuthenticateUserHandler>();
-            services.AddTransient<IRequestHandler<RegisterUserCommand, UserDTO>, RegisterUserHandler>();
-            services.AddTransient<IRequestHandler<ChargeAccountCommand, UserDTO>, ChargeAccountHandler>();
+            services.AddTransient<IRequestHandler<RegisterUserCommand, UserDto>, RegisterUserHandler>();
+            services.AddTransient<IRequestHandler<ChargeAccountCommand, UserDto>, ChargeAccountHandler>();
+            services.AddTransient<IRequestHandler<GetCantorCurrenciesQuery, IEnumerable<CantorCurrencyDto>>, GetCantorCurrenciesHandler>();
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
         }
     }

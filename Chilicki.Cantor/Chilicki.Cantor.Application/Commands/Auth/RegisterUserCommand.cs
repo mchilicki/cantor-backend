@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Chilicki.Cantor.Application.Commands.Auth
 {
-    public class RegisterUserCommand : IRequest<UserDTO>
+    public class RegisterUserCommand : IRequest<UserDto>
     {
         public string Login { get; set; }
         public string Email { get; set; }

@@ -36,7 +36,7 @@ namespace Chilicki.Cantor.WebAPI.Controllers.Base
             if (exception is UnathorizedException) code = HttpStatusCode.Unauthorized;
             else if (exception is BadRequestException) code = HttpStatusCode.BadRequest;
 
-            var errorDto = new ErrorDTO()
+            var errorDto = new ErrorDto()
             {
                 Error = exception.Message
             };

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Chilicki.Cantor.Application.CommandHandlers.Charges
 {
-    public class ChargeAccountHandler : IRequestHandler<ChargeAccountCommand, UserDTO>
+    public class ChargeAccountHandler : IRequestHandler<ChargeAccountCommand, UserDto>
     {
         readonly IUserRepository _userRepository;
         readonly IHttpContextAccessor _httpContext;
@@ -36,12 +36,12 @@ namespace Chilicki.Cantor.Application.CommandHandlers.Charges
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<UserDTO> Handle(ChargeAccountCommand request, CancellationToken cancellationToken)
+        public async Task<UserDto> Handle(ChargeAccountCommand request, CancellationToken cancellationToken)
         {
             var user = await _userRepository.FindAsync(_httpContext.HttpContext.User.Identity.Name);
             user = _chargeAccountService.ChargeUserAccount(user, request.Amount);
             await _unitOfWork.SaveAsync();
-            var userDto = _mapper.Map<UserDTO>(user);
+            var userDto = _mapper.Map<UserDto>(user);
             return userDto;
         }
     }

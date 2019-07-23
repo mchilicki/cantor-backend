@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Chilicki.Cantor.Application.DTOs.Errors
 {
-    public class ErrorDTO
+    public class ErrorDto
     {
         public string Error { get; set; }
     }
