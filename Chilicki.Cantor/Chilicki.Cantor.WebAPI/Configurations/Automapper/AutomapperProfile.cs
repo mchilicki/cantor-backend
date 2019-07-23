@@ -2,6 +2,7 @@
 using Chilicki.Cantor.Application.Commands.Auth;
 using Chilicki.Cantor.Application.DTOs;
 using Chilicki.Cantor.Application.DTOs.Currencies;
+using Chilicki.Cantor.Application.Mappers;
 using Chilicki.Cantor.Domain.Entities;
 using Chilicki.Cantor.Domain.ValueObjects.Users;
 using System;
@@ -20,6 +21,10 @@ namespace Chilicki.Cantor.WebAPI.Configurations.Automapper
             CreateMap<User, UserDto>();
             CreateMap<AuthenticateUserCommand, UserCredentials>();
             CreateMap<Currency, CantorCurrencyDto>();
+            CreateMap<WalletCurrency, UserCurrencyDto>()
+                .IncludeMembers(p => p.Currency)
+                .ForMember(p => p.Value, p => p.MapFrom<CurrencyValueMapper>());
+            CreateMap<Currency, UserCurrencyDto>();
         }
     }
 }

@@ -178,6 +178,7 @@ namespace Chilicki.Cantor.WebAPI
             services.AddTransient<IRequestHandler<RegisterUserCommand, UserDto>, RegisterUserHandler>();
             services.AddTransient<IRequestHandler<ChargeAccountCommand, UserDto>, ChargeAccountHandler>();
             services.AddTransient<IRequestHandler<GetCantorCurrenciesQuery, IEnumerable<CantorCurrencyDto>>, GetCantorCurrenciesHandler>();
+            services.AddTransient<IRequestHandler<GetUserCurrenciesQuery, IEnumerable<UserCurrencyDto>>, GetUserCurrenciesHandler>();
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
         }
     }

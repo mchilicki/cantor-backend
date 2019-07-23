@@ -12,7 +12,7 @@ namespace Chilicki.Cantor.WebAPI.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
-    [ApiController]    
+    [ApiController]
     public class CurrenciesController : ControllerBase
     {
         readonly IMediator _mediator;
@@ -24,6 +24,13 @@ namespace Chilicki.Cantor.WebAPI.Controllers
 
         [HttpGet("cantor")]
         public async Task<IActionResult> GetCantorCurrencies([FromQuery]GetCantorCurrenciesQuery command)
+        {
+            var response = await _mediator.Send(command);
+            return Ok(response);
+        }
+
+        [HttpGet("user")]
+        public async Task<IActionResult> GetUserCurrencies([FromQuery]GetUserCurrenciesQuery command)
         {
             var response = await _mediator.Send(command);
             return Ok(response);
