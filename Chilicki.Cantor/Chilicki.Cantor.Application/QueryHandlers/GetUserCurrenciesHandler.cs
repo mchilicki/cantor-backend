@@ -31,12 +31,9 @@ namespace Chilicki.Cantor.Application.QueryHandlers
 
         public async Task<IEnumerable<UserCurrencyDto>> Handle(GetUserCurrenciesQuery request, CancellationToken cancellationToken)
         {
-            var user = currentUserService.GetCurrentUser();
-            var currencies = await walletCurrencyRepository.GetAllAsync();
-            var currencyDtos = mapper.Map<IEnumerable<UserCurrencyDto>>(currencies);
+            var user = await currentUserService.GetCurrentUser();
+            var currencyDtos = mapper.Map<IEnumerable<UserCurrencyDto>>(user.BoughtCurrencies);
             return currencyDtos;
         }
-
-        
     }
 }
