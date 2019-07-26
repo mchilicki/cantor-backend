@@ -17,13 +17,13 @@ namespace Chilicki.Cantor.Application.CommandHandlers.CurrencyUpdaters
 {
     public class CurrencyUpdater : ICurrencyUpdater
     {
-        readonly ICurrencyRepository _currencyRepository;
-        readonly ICantorCurrencyRepository _cantorCurrencyRepository;
-        readonly ICurrencyUpdaterRestClient _currencyUpdaterRestClient;
-        readonly ICantorWalletRepository _cantorWalletRepository;
-        readonly ICurrencyUpdateService _currencyUpdateService;
-        readonly IUnitOfWork _unitOfWork;
-        readonly IInitializeCurrenciesFactory _initializeCurrenciesFactory;
+        readonly ICurrencyRepository currencyRepository;
+        readonly ICantorCurrencyRepository cantorCurrencyRepository;
+        readonly ICurrencyUpdaterRestClient currencyUpdaterRestClient;
+        readonly ICantorWalletRepository cantorWalletRepository;
+        readonly ICurrencyUpdateService currencyUpdateService;
+        readonly IUnitOfWork unitOfWork;
+        readonly IInitializeCurrenciesFactory initializeCurrenciesFactory;
 
         public CurrencyUpdater(
             ICurrencyRepository currencyRepository,
@@ -34,13 +34,13 @@ namespace Chilicki.Cantor.Application.CommandHandlers.CurrencyUpdaters
             IUnitOfWork unitOfWork,
             IInitializeCurrenciesFactory initializeCurrenciesFactory)
         {
-            _currencyRepository = currencyRepository;
-            _cantorCurrencyRepository = cantorCurrencyRepository;
-            _currencyUpdaterRestClient = currencyUpdaterRestClient;
-            _cantorWalletRepository = cantorWalletRepository;
-            _currencyUpdateService = currencyUpdateService;
-            _unitOfWork = unitOfWork;
-            _initializeCurrenciesFactory = initializeCurrenciesFactory;
+            this.currencyRepository = currencyRepository;
+            this.cantorCurrencyRepository = cantorCurrencyRepository;
+            this.currencyUpdaterRestClient = currencyUpdaterRestClient;
+            this.cantorWalletRepository = cantorWalletRepository;
+            this.currencyUpdateService = currencyUpdateService;
+            this.unitOfWork = unitOfWork;
+            this.initializeCurrenciesFactory = initializeCurrenciesFactory;
         }
 
         public async Task<bool> InitializeAndUpdateCurrencies()
@@ -55,31 +55,31 @@ namespace Chilicki.Cantor.Application.CommandHandlers.CurrencyUpdaters
 
         public async Task InitializeCurrencies()
         {
-            var defaultCantorWallet = _initializeCurrenciesFactory.CreateDefaultCantorWallet();
-            await _cantorWalletRepository.AddAsync(defaultCantorWallet);
-            var defaultCurrencies = _initializeCurrenciesFactory.CreateDefaultCurrencies();
-            await _currencyRepository.AddRangeAsync(defaultCurrencies);
-            var defaultCantorCurrencies = _initializeCurrenciesFactory.CreateDefaultCantorCurrencies(defaultCantorWallet, defaultCurrencies);
-            await _cantorCurrencyRepository.AddRangeAsync(defaultCantorCurrencies);
-            await _unitOfWork.SaveAsync();
+            var defaultCantorWallet = initializeCurrenciesFactory.CreateDefaultCantorWallet();
+            await cantorWalletRepository.AddAsync(defaultCantorWallet);
+            var defaultCurrencies = initializeCurrenciesFactory.CreateDefaultCurrencies();
+            await currencyRepository.AddRangeAsync(defaultCurrencies);
+            var defaultCantorCurrencies = initializeCurrenciesFactory.CreateDefaultCantorCurrencies(defaultCantorWallet, defaultCurrencies);
+            await cantorCurrencyRepository.AddRangeAsync(defaultCantorCurrencies);
+            await unitOfWork.SaveAsync();
         }
 
         public async Task<bool> UpdateCurrencies()
         {
-            var updatedCurrencies = _currencyUpdaterRestClient.GetUpdatedCurrencies();
-            var cantorWallet = await _cantorWalletRepository.GetCantor();
+            var updatedCurrencies = currencyUpdaterRestClient.GetUpdatedCurrencies();
+            var cantorWallet = await cantorWalletRepository.GetCantor();
             if (!ShouldUpdateCurrencies(cantorWallet, updatedCurrencies))
                 return false;
-            var allCurrencies = await _currencyRepository.GetAllAsync();
-            var remainingCurrencies = _currencyUpdateService.UpdateCurrencies(cantorWallet, allCurrencies, updatedCurrencies);
-            await _currencyRepository.AddRangeAsync(remainingCurrencies.Items);
-            await _unitOfWork.SaveAsync();
+            var allCurrencies = await currencyRepository.GetAllAsync();
+            var remainingCurrencies = currencyUpdateService.UpdateCurrencies(cantorWallet, allCurrencies, updatedCurrencies);
+            await currencyRepository.AddRangeAsync(remainingCurrencies.Items);
+            await unitOfWork.SaveAsync();
             return true;
         }
 
         public async Task<bool> AreCurrenciesNotInitialized()
         {
-            var cantorWalletsCount = await _cantorWalletRepository.GetCountAsync();
+            var cantorWalletsCount = await cantorWalletRepository.GetCountAsync();
             return cantorWalletsCount == 0;
         }
 

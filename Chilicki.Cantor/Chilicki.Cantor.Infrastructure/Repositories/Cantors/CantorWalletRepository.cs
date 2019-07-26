@@ -18,7 +18,7 @@ namespace Chilicki.Cantor.Infrastructure.Repositories.Cantors
 
         public async Task<CantorWallet> GetCantor()
         {
-            return await _entities
+            return await entities
                 .FirstOrDefaultAsync();
         }
     }

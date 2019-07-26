@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using Chilicki.Cantor.Application.DTOs.Currencies;
+using Chilicki.Cantor.Application.Helpers.Users.Base;
 using Chilicki.Cantor.Application.Queries;
+using Chilicki.Cantor.Infrastructure.Repositories.Users.Base;
 using Chilicki.Cantor.Infrastructure.Repositories.Wallets.Base;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -12,23 +15,28 @@ namespace Chilicki.Cantor.Application.QueryHandlers
 {
     public class GetUserCurrenciesHandler : IRequestHandler<GetUserCurrenciesQuery, IEnumerable<UserCurrencyDto>>
     {
-        readonly IWalletCurrencyRepository _walletCurrencyRepository;
-        readonly IMapper _mapper;
+        readonly IWalletCurrencyRepository walletCurrencyRepository;
+        readonly IMapper mapper;
+        readonly ICurrentUserService currentUserService;
 
         public GetUserCurrenciesHandler(
             IWalletCurrencyRepository walletCurrencyRepository,
-            IMapper mapper)
+            IMapper mapper,
+            ICurrentUserService currentUserService)
         {
-            _walletCurrencyRepository = walletCurrencyRepository;
-            _mapper = mapper;
+            this.walletCurrencyRepository = walletCurrencyRepository;
+            this.mapper = mapper;
+            this.currentUserService = currentUserService;
         }
 
         public async Task<IEnumerable<UserCurrencyDto>> Handle(GetUserCurrenciesQuery request, CancellationToken cancellationToken)
         {
-            // add getting per user
-            var currencies = await _walletCurrencyRepository.GetAllAsync();
-            var currencyDtos = _mapper.Map<IEnumerable<UserCurrencyDto>>(currencies);
+            var user = currentUserService.GetCurrentUser();
+            var currencies = await walletCurrencyRepository.GetAllAsync();
+            var currencyDtos = mapper.Map<IEnumerable<UserCurrencyDto>>(currencies);
             return currencyDtos;
         }
+
+        
     }
 }

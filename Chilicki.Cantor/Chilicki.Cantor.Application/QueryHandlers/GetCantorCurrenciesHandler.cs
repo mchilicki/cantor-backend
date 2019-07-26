@@ -13,22 +13,22 @@ namespace Chilicki.Cantor.Application.QueryHandlers
 {
     public class GetCantorCurrenciesHandler : IRequestHandler<GetCantorCurrenciesQuery, IEnumerable<CantorCurrencyDto>>
     {
-        readonly ICurrencyRepository _currencyRepository;
-        readonly IMapper _mapper;
+        readonly ICurrencyRepository currencyRepository;
+        readonly IMapper mapper;
 
         public GetCantorCurrenciesHandler(
             ICurrencyRepository currencyRepository,
             IMapper mapper)
         {
-            _currencyRepository = currencyRepository;
-            _mapper = mapper;
+            this.currencyRepository = currencyRepository;
+            this.mapper = mapper;
         }
 
         public async Task<IEnumerable<CantorCurrencyDto>> Handle(
             GetCantorCurrenciesQuery query, CancellationToken cancellationToken)
         {
-            var currencies = await _currencyRepository.GetAllAsync();
-            var currencyDtos = _mapper.Map<IEnumerable<CantorCurrencyDto>>(currencies);
+            var currencies = await currencyRepository.GetAllAsync();
+            var currencyDtos = mapper.Map<IEnumerable<CantorCurrencyDto>>(currencies);
             return currencyDtos;
         }
     }

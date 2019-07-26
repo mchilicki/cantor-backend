@@ -16,18 +16,18 @@ namespace Chilicki.Cantor.WebAPI.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        readonly IMediator _mediator;
+        readonly IMediator mediator;
 
         public UsersController(IMediator mediator)
         {
-            _mediator = mediator;
+            this.mediator = mediator;
         }
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
         public async Task<IActionResult> Authenticate([FromBody]AuthenticateUserCommand command)
         {
-            var response = await _mediator.Send(command);
+            var response = await mediator.Send(command);
             return Ok(response);
         }
 
@@ -35,14 +35,14 @@ namespace Chilicki.Cantor.WebAPI.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody]RegisterUserCommand command)
         {
-            var response = await _mediator.Send(command);
+            var response = await mediator.Send(command);
             return Ok(response);
         }
 
         [HttpPost("charge")]
         public async Task<IActionResult> ChargeAccount([FromBody]ChargeAccountCommand command)
         {
-            var response = await _mediator.Send(command);
+            var response = await mediator.Send(command);
             return Ok(response);
         }
     }

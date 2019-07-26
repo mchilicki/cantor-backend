@@ -17,10 +17,10 @@ namespace Chilicki.Cantor.Application.CommandHandlers.Auth
 {
     public class RegisterUserHandler : IRequestHandler<RegisterUserCommand, UserDto>
     {
-        readonly IMapper _mapper;
-        readonly IUserRepository _userRepository;
-        readonly IUserFactory _userFactory;
-        readonly IUnitOfWork _unitOfWork;
+        readonly IMapper mapper;
+        readonly IUserRepository userRepository;
+        readonly IUserFactory userFactory;
+        readonly IUnitOfWork unitOfWork;
 
         public RegisterUserHandler(
             IMapper mapper,
@@ -28,28 +28,28 @@ namespace Chilicki.Cantor.Application.CommandHandlers.Auth
             IUserFactory userFactory,
             IUnitOfWork unitOfWork)
         {
-            _mapper = mapper;
-            _userRepository = userRepository;
-            _userFactory = userFactory;
-            _unitOfWork = unitOfWork;
+            this.mapper = mapper;
+            this.userRepository = userRepository;
+            this.userFactory = userFactory;
+            this.unitOfWork = unitOfWork;
         }
 
         public async Task<UserDto> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
-            var userToRegister = _mapper.Map<UserToRegister>(request);
+            var userToRegister = mapper.Map<UserToRegister>(request);
             await CanRegisterUser(userToRegister);
-            var user = _userFactory.Create(userToRegister);
-            var registeredUser = await _userRepository.AddAsync(user);
-            await _unitOfWork.SaveAsync();
-            return _mapper.Map<UserDto>(registeredUser);
+            var user = userFactory.Create(userToRegister);
+            var registeredUser = await userRepository.AddAsync(user);
+            await unitOfWork.SaveAsync();
+            return mapper.Map<UserDto>(registeredUser);
         }
 
         private async Task<bool> CanRegisterUser(UserToRegister userToRegister)
         {
-            var doesEmailExists = await _userRepository.DoesEmailAlreadyExists(userToRegister.Email);
+            var doesEmailExists = await userRepository.DoesEmailAlreadyExists(userToRegister.Email);
             if (doesEmailExists)
                 throw new EmailAlreadyExistsException();
-            var doesLoginExists = await _userRepository.DoesLoginAlreadyExists(userToRegister.Login);
+            var doesLoginExists = await userRepository.DoesLoginAlreadyExists(userToRegister.Login);
             if (doesLoginExists)
                 throw new LoginAlreadyExistsException();
             return true;

@@ -19,11 +19,11 @@ namespace Chilicki.Cantor.Application.CommandHandlers.Auth
 {
     public class AuthenticateUserHandler : IRequestHandler<AuthenticateUserCommand, UserToken>
     {
-        readonly IUserRepository _userRepository;
-        readonly IMapper _mapper;
-        readonly IConfiguration _configuration;
-        readonly IUserService _userService;
-        readonly IUnitOfWork _unitOfWork;
+        readonly IUserRepository userRepository;
+        readonly IMapper mapper;
+        readonly IConfiguration configuration;
+        readonly IUserService userService;
+        readonly IUnitOfWork unitOfWork;
 
         public AuthenticateUserHandler(
             IUserRepository userRepository,
@@ -32,22 +32,22 @@ namespace Chilicki.Cantor.Application.CommandHandlers.Auth
             IUserService userService,
             IUnitOfWork unitOfWork)
         {
-            _userRepository = userRepository;
-            _mapper = mapper;
-            _configuration = configuration;
-            _userService = userService;
-            _unitOfWork = unitOfWork;
+            this.userRepository = userRepository;
+            this.mapper = mapper;
+            this.configuration = configuration;
+            this.userService = userService;
+            this.unitOfWork = unitOfWork;
         }
 
         public async Task<UserToken> Handle(AuthenticateUserCommand request, CancellationToken cancellationToken)
         {
             var secretKey = GetConfigurationSecretKey();
-            var userCredentials = _mapper.Map<UserCredentials>(request);
-            var user = await _userRepository.FindByLoginOrEmailAndPassword(userCredentials);
+            var userCredentials = mapper.Map<UserCredentials>(request);
+            var user = await userRepository.FindByLoginOrEmailAndPassword(userCredentials);
             ShouldUserBeAuthenticated(user);
-            var userToken = _userService.GenerateUserToken(user, secretKey);
-            var authenticatedUser = _userService.UpdateUserToken(user, userToken);
-            await _unitOfWork.SaveAsync();
+            var userToken = userService.GenerateUserToken(user, secretKey);
+            var authenticatedUser = userService.UpdateUserToken(user, userToken);
+            await unitOfWork.SaveAsync();
             return userToken;
         }
 
@@ -60,7 +60,7 @@ namespace Chilicki.Cantor.Application.CommandHandlers.Auth
 
         private string GetConfigurationSecretKey()
         {
-            var authenticationSettingsSection = _configuration.GetSection(nameof(AuthenticationSettings));
+            var authenticationSettingsSection = configuration.GetSection(nameof(AuthenticationSettings));
             var authenticationSettings = authenticationSettingsSection.Get<AuthenticationSettings>();
             return authenticationSettings.Secret;
         }

@@ -19,38 +19,38 @@ namespace Chilicki.Cantor.Infrastructure.Repositories.Users
 
         public async Task<User> FindByLoginOrEmailAndPassword(UserCredentials userCredentials)
         {
-            return await _entities
+            return await entities
                 .FirstOrDefaultAsync(p => (p.Login == userCredentials.LoginOrEmail ||
                     p.Email == userCredentials.LoginOrEmail) && p.Password == userCredentials.Password);
         }
 
         public async Task<User> FindByLoginOrEmail(string loginOrEmail)
         {
-            return await _entities
+            return await entities
                 .FirstOrDefaultAsync(p => p.Login == loginOrEmail || p.Email == loginOrEmail);
         }
 
         public async Task<User> FindByLogin(string login)
         {
-            return await _entities
+            return await entities
                 .FirstOrDefaultAsync(p => p.Login == login);
         }
 
         public async Task<User> FindByEmail(string email)
         {
-            return await _entities
+            return await entities
                 .FirstOrDefaultAsync(p => p.Email == email);
         }
 
         public async Task<bool> DoesEmailAlreadyExists(string email)
         {
-            return await _entities
+            return await entities
                 .AnyAsync(p => p.Email == email);
         }
 
         public async Task<bool> DoesLoginAlreadyExists(string login)
         {
-            return await _entities
+            return await entities
                 .AnyAsync(p => p.Login == login);
         }
     }

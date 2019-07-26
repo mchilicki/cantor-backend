@@ -14,21 +14,21 @@ namespace Chilicki.Cantor.Domain.Services.Users
 {
     public class UserService : IUserService
     {
-        readonly IUserTokenFactory _userTokenFactory;
-        readonly IUserTokenGenerator _userTokenGenerator;
+        readonly IUserTokenFactory userTokenFactory;
+        readonly IUserTokenGenerator userTokenGenerator;
 
         public UserService(
             IUserTokenFactory userTokenFactory,
             IUserTokenGenerator userTokenGenerator)
         {
-            _userTokenFactory = userTokenFactory;
-            _userTokenGenerator = userTokenGenerator;
+            this.userTokenFactory = userTokenFactory;
+            this.userTokenGenerator = userTokenGenerator;
         }
 
         public UserToken GenerateUserToken(User user, string secretKey)
         {
-            string tokenString = _userTokenGenerator.GenerateToken(user, secretKey);
-            var userToken = _userTokenFactory.Create(tokenString);
+            string tokenString = userTokenGenerator.GenerateToken(user, secretKey);
+            var userToken = userTokenFactory.Create(tokenString);
             return userToken;
         }
 

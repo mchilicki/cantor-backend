@@ -7,11 +7,11 @@ namespace Chilicki.Cantor.Infrastructure.RestClients.Helpers
 {
     public class NewtonsoftJsonSerializer : IDeserializer
     {
-        private JsonSerializer _serializer;
+        private JsonSerializer serializer;
 
         public NewtonsoftJsonSerializer(JsonSerializer serializer)
         {
-            _serializer = serializer;
+            this.serializer = serializer;
         }
 
         public string DateFormat { get; set; }

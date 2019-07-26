@@ -10,45 +10,45 @@ namespace Chilicki.Cantor.Infrastructure.Repositories.Base
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
     {
-        protected DbContext _context;
-        protected DbSet<TEntity> _entities; 
+        protected DbContext context;
+        protected DbSet<TEntity> entities; 
 
         public BaseRepository(DbContext context)
         {
-            _context = context;
-            _entities = _context.Set<TEntity>();
+            this.context = context;
+            entities = this.context.Set<TEntity>();
         }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            return await _entities.ToListAsync();
+            return await entities.ToListAsync();
         }
 
         public async Task<TEntity> FindAsync(string key)
         {
             var keyGuid = Guid.Parse(key);
-            return await _entities.FindAsync(keyGuid);
+            return await entities.FindAsync(keyGuid);
         }
 
         public async Task<TEntity> FindAsync(params object[] keyValues)
         {
-            return await _entities.FindAsync(keyValues);
+            return await entities.FindAsync(keyValues);
         }
 
         public async Task<TEntity> AddAsync(TEntity entity)
         {
-            var entry = await _entities.AddAsync(entity);
+            var entry = await entities.AddAsync(entity);
             return entry.Entity;
         }
 
         public async Task AddRangeAsync(IEnumerable<TEntity> entities)
         {
-            await _entities.AddRangeAsync(entities);
+            await this.entities.AddRangeAsync(entities);
         }
 
         public async Task<int> GetCountAsync()
         {
-            return await _entities.CountAsync();
+            return await entities.CountAsync();
         }
     }
 }
