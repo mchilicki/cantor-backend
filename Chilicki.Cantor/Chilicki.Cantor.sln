@@ -3,43 +3,33 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.645
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Common", "1. Common", "{D392B6F5-62DE-46C1-8E1E-509ECF39140B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Infrastructure", "1. Infrastructure", "{C3B1B962-CCC3-4731-92D4-650E15D90375}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Infrastructure", "2. Infrastructure", "{C3B1B962-CCC3-4731-92D4-650E15D90375}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Domain", "2. Domain", "{58C3CDB0-94AB-4D70-B801-51DBFBBB5E41}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Domain", "3. Domain", "{58C3CDB0-94AB-4D70-B801-51DBFBBB5E41}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Application", "3. Application", "{C4309A5E-BE06-4261-801E-521771E84079}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Application", "4. Application", "{C4309A5E-BE06-4261-801E-521771E84079}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. User Interface", "5. User Interface", "{A0D2025F-629A-4D5C-9E91-CA2B02AAB7DB}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chilicki.Cantor.Common", "Chilicki.Cantor.Common\Chilicki.Cantor.Common.csproj", "{DD98C1BD-5305-4C56-924F-700B6A5A28AC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. User Interface", "4. User Interface", "{A0D2025F-629A-4D5C-9E91-CA2B02AAB7DB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chilicki.Cantor.Infrastructure", "Chilicki.Cantor.Infrastructure\Chilicki.Cantor.Infrastructure.csproj", "{9A2AFFDA-1B4D-4A59-831D-93B561226A5C}"
 	ProjectSection(ProjectDependencies) = postProject
 		{70BAF799-D69D-4EBB-AE11-ADB667C7CA50} = {70BAF799-D69D-4EBB-AE11-ADB667C7CA50}
-		{DD98C1BD-5305-4C56-924F-700B6A5A28AC} = {DD98C1BD-5305-4C56-924F-700B6A5A28AC}
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chilicki.Cantor.Domain", "Chilicki.Cantor.Domain\Chilicki.Cantor.Domain.csproj", "{70BAF799-D69D-4EBB-AE11-ADB667C7CA50}"
-	ProjectSection(ProjectDependencies) = postProject
-		{DD98C1BD-5305-4C56-924F-700B6A5A28AC} = {DD98C1BD-5305-4C56-924F-700B6A5A28AC}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chilicki.Cantor.Application", "Chilicki.Cantor.Application\Chilicki.Cantor.Application.csproj", "{78E7D511-2288-4385-AB32-071D669FAA7E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{70BAF799-D69D-4EBB-AE11-ADB667C7CA50} = {70BAF799-D69D-4EBB-AE11-ADB667C7CA50}
-		{DD98C1BD-5305-4C56-924F-700B6A5A28AC} = {DD98C1BD-5305-4C56-924F-700B6A5A28AC}
 		{9A2AFFDA-1B4D-4A59-831D-93B561226A5C} = {9A2AFFDA-1B4D-4A59-831D-93B561226A5C}
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chilicki.Cantor.WebAPI", "Chilicki.Cantor.WebAPI\Chilicki.Cantor.WebAPI.csproj", "{474DDD83-BF6A-45C5-91F6-D4920A22A000}"
 	ProjectSection(ProjectDependencies) = postProject
 		{78E7D511-2288-4385-AB32-071D669FAA7E} = {78E7D511-2288-4385-AB32-071D669FAA7E}
-		{DD98C1BD-5305-4C56-924F-700B6A5A28AC} = {DD98C1BD-5305-4C56-924F-700B6A5A28AC}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chilicki.Cantor.CurrencyUpdater", "Chilicki.Cantor.CurrencyUpdater\Chilicki.Cantor.CurrencyUpdater.csproj", "{7CB1A458-6549-46FB-BCB4-FEE12BF75030}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chilicki.Cantor.CurrencyUpdater", "Chilicki.Cantor.CurrencyUpdater\Chilicki.Cantor.CurrencyUpdater.csproj", "{7CB1A458-6549-46FB-BCB4-FEE12BF75030}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +37,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DD98C1BD-5305-4C56-924F-700B6A5A28AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DD98C1BD-5305-4C56-924F-700B6A5A28AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DD98C1BD-5305-4C56-924F-700B6A5A28AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DD98C1BD-5305-4C56-924F-700B6A5A28AC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9A2AFFDA-1B4D-4A59-831D-93B561226A5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9A2AFFDA-1B4D-4A59-831D-93B561226A5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A2AFFDA-1B4D-4A59-831D-93B561226A5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -76,7 +62,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{DD98C1BD-5305-4C56-924F-700B6A5A28AC} = {D392B6F5-62DE-46C1-8E1E-509ECF39140B}
 		{9A2AFFDA-1B4D-4A59-831D-93B561226A5C} = {C3B1B962-CCC3-4731-92D4-650E15D90375}
 		{70BAF799-D69D-4EBB-AE11-ADB667C7CA50} = {58C3CDB0-94AB-4D70-B801-51DBFBBB5E41}
 		{78E7D511-2288-4385-AB32-071D669FAA7E} = {C4309A5E-BE06-4261-801E-521771E84079}
