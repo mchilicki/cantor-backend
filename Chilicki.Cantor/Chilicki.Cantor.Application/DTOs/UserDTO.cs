@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Chilicki.Cantor.Application.DTOs.Currencies;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,5 +13,6 @@ namespace Chilicki.Cantor.Application.DTOs
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public decimal Money { get; set; }
+        public IEnumerable<UserCurrencyDto> Currencies { get; set; }
     }
 }

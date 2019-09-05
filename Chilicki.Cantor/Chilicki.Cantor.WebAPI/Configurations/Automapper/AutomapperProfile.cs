@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Chilicki.Cantor.Application.Commands.Auth;
+using Chilicki.Cantor.Application.Commands.Buying;
 using Chilicki.Cantor.Application.DTOs;
 using Chilicki.Cantor.Application.DTOs.Currencies;
 using Chilicki.Cantor.Application.Mappers;
+using Chilicki.Cantor.Domain.Commands.Buying;
 using Chilicki.Cantor.Domain.Entities;
 using Chilicki.Cantor.Domain.ValueObjects.Users;
 using System;
@@ -25,6 +27,10 @@ namespace Chilicki.Cantor.WebAPI.Configurations.Automapper
                 .IncludeMembers(p => p.Currency)
                 .ForMember(p => p.Value, p => p.MapFrom<CurrencyValueMapper>());
             CreateMap<Currency, UserCurrencyDto>();
+            CreateMap<UserCurrencyDto, Currency>()
+                .ConvertUsing<CurrencyMapper>();
+            CreateMap<BuyCurrencyCommandDto, BuyCurrencyCommand>()
+                .ConvertUsing<BuyCurrencyCommandMapper>();
         }
     }
 }

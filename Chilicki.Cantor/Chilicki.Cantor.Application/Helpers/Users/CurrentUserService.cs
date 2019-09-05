@@ -22,9 +22,19 @@ namespace Chilicki.Cantor.Application.Helpers.Users
             this.userRepository = userRepository;
         }
 
-        public async Task<User> GetCurrentUser()
+        public async Task<User> GetCurrentUserAsync()
         {
-            return await userRepository.FindAsync(httpContextAccessor.HttpContext.User.Identity.Name);
+            return await userRepository.FindAsync(GetUserName());
+        }
+               
+        public User GetCurrentUser()
+        {
+            return userRepository.Find(GetUserName());
+        }
+
+        private Guid GetUserName()
+        {
+            return Guid.Parse(httpContextAccessor.HttpContext.User.Identity.Name);
         }
     }
 }

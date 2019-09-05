@@ -67,7 +67,7 @@ namespace Chilicki.Cantor.Application.CommandHandlers.CurrencyUpdaters
         public async Task<bool> UpdateCurrencies()
         {
             var updatedCurrencies = currencyUpdaterRestClient.GetUpdatedCurrencies();
-            var cantorWallet = await cantorWalletRepository.GetCantor();
+            var cantorWallet = await cantorWalletRepository.GetCantorWalletAsync();
             if (!ShouldUpdateCurrencies(cantorWallet, updatedCurrencies))
                 return false;
             var allCurrencies = await currencyRepository.GetAllAsync();

@@ -52,6 +52,15 @@ using Chilicki.Cantor.Application.QueryHandlers;
 using Chilicki.Cantor.Application.DTOs.Currencies;
 using Chilicki.Cantor.Application.Helpers.Users;
 using Chilicki.Cantor.Application.Helpers.Users.Base;
+using Chilicki.Cantor.Domain.Services.Buying;
+using Chilicki.Cantor.Domain.Services.Buying.Base;
+using Chilicki.Cantor.Application.Commands.Buying;
+using Chilicki.Cantor.Application.CommandHandlers.Buying;
+using Chilicki.Cantor.Domain.Factories.Currencies;
+using Chilicki.Cantor.Domain.Factories.Currencies.Base;
+using Chilicki.Cantor.Application.Mappers;
+using Chilicki.Cantor.Domain.Commands.Buying;
+using Chilicki.Cantor.Domain.Entities;
 
 namespace Chilicki.Cantor.WebAPI
 {
@@ -69,9 +78,9 @@ namespace Chilicki.Cantor.WebAPI
             ConfigureMVC(services);
             ConfigureMediatR(services);
             ConfigureDatabase(services);
-            ConfigureJWTAuthentication(services);
-            ConfigureAutomapper(services);
+            ConfigureJWTAuthentication(services);            
             RegisterDependencies(services);
+            ConfigureAutomapper(services);
         }        
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -139,8 +148,10 @@ namespace Chilicki.Cantor.WebAPI
 
         private void ConfigureAutomapper(IServiceCollection services)
         {
+            var container = services.BuildServiceProvider();
             var mappingConfig = new MapperConfiguration(mc =>
             {
+                mc.ConstructServicesUsing(type => container.GetRequiredService(type));
                 mc.AddProfile(new AutomapperProfile());
             });
             var mapper = mappingConfig.CreateMapper();
@@ -172,6 +183,8 @@ namespace Chilicki.Cantor.WebAPI
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IUserTokenGenerator, UserTokenGenerator>();
             services.AddTransient<IChargeAccountService, ChargeAccountService>();
+            services.AddTransient<IBuyCurrencyService, BuyCurrencyService>();
+            services.AddTransient<IWalletCurrencyFactory, WalletCurrencyFactory>();
         }
 
         private void RegisterApplicationDependencies(IServiceCollection services)
@@ -181,8 +194,11 @@ namespace Chilicki.Cantor.WebAPI
             services.AddTransient<IRequestHandler<ChargeAccountCommand, UserDto>, ChargeAccountHandler>();
             services.AddTransient<IRequestHandler<GetCantorCurrenciesQuery, IEnumerable<CantorCurrencyDto>>, GetCantorCurrenciesHandler>();
             services.AddTransient<IRequestHandler<GetUserCurrenciesQuery, IEnumerable<UserCurrencyDto>>, GetUserCurrenciesHandler>();
+            services.AddTransient<IRequestHandler<BuyCurrencyCommandDto, UserDto>, BuyCurrencyHandler>();
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<ICurrentUserService, CurrentUserService>();
+            services.AddTransient<BuyCurrencyCommandMapper>();
+            services.AddTransient<CurrencyMapper>();
         }
     }
 }

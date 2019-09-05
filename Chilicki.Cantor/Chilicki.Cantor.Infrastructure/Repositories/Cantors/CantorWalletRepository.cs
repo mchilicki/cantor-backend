@@ -16,10 +16,20 @@ namespace Chilicki.Cantor.Infrastructure.Repositories.Cantors
         {
         }
 
-        public async Task<CantorWallet> GetCantor()
+        public async Task<CantorWallet> GetCantorWalletAsync()
         {
+            // TODO Including in EF Core needs including
             return await entities
+                .Include(p => p.CantorCurrencies)
+                //.ThenInclude
                 .FirstOrDefaultAsync();
+        }
+
+        public CantorWallet GetCantorWallet()
+        {
+            return entities
+                .Include(p => p.CantorCurrencies)
+                .FirstOrDefault();
         }
     }
 }

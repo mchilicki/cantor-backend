@@ -8,6 +8,7 @@ namespace Chilicki.Cantor.Application.Helpers.Users.Base
 {
     public interface ICurrentUserService
     {
-        Task<User> GetCurrentUser();
+        Task<User> GetCurrentUserAsync();
+        User GetCurrentUser();
     }
 }

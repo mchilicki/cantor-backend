@@ -9,6 +9,7 @@ namespace Chilicki.Cantor.Infrastructure.Repositories.Cantors.Base
 {
     public interface ICantorWalletRepository : IBaseRepository<CantorWallet>
     {
-        Task<CantorWallet> GetCantor();
+        Task<CantorWallet> GetCantorWalletAsync();
+        CantorWallet GetCantorWallet();
     }
 }
