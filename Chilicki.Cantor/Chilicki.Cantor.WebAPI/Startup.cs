@@ -171,40 +171,40 @@ namespace Chilicki.Cantor.WebAPI
 
         private void RegisterInfrastructureDependencies(IServiceCollection services)
         {
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
-            services.AddTransient<IBaseRepository<BaseEntity>, BaseRepository<BaseEntity>>();
-            services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<ICantorCurrencyRepository, CantorCurrencyRepository>();
-            services.AddTransient<ICantorWalletRepository, CantorWalletRepository>();
-            services.AddTransient<ICurrencyRepository, CurrencyRepository>();
-            services.AddTransient<IWalletCurrencyRepository, WalletCurrencyRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IBaseRepository<BaseEntity>, BaseRepository<BaseEntity>>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ICantorCurrencyRepository, CantorCurrencyRepository>();
+            services.AddScoped<ICantorWalletRepository, CantorWalletRepository>();
+            services.AddScoped<ICurrencyRepository, CurrencyRepository>();
+            services.AddScoped<IWalletCurrencyRepository, WalletCurrencyRepository>();
         }
 
         private void RegisterDomainDependencies(IServiceCollection services)
         {
-            services.AddTransient<IUserFactory, UserFactory>();
-            services.AddTransient<IUserTokenFactory, UserTokenFactory>();
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<IUserTokenGenerator, UserTokenGenerator>();
-            services.AddTransient<IChargeAccountService, ChargeAccountService>();
-            services.AddTransient<IBuyCurrencyService, BuyCurrencyService>();
-            services.AddTransient<IWalletCurrencyFactory, WalletCurrencyFactory>();
-            services.AddTransient<IBuyCurrencyValidator, BuyCurrencyValidator>();
-            services.AddTransient<ICantorCostsCalculator, CantorCostsCalculator>();
+            services.AddScoped<IUserFactory, UserFactory>();
+            services.AddScoped<IUserTokenFactory, UserTokenFactory>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserTokenGenerator, UserTokenGenerator>();
+            services.AddScoped<IChargeAccountService, ChargeAccountService>();
+            services.AddScoped<IBuyCurrencyService, BuyCurrencyService>();
+            services.AddScoped<IWalletCurrencyFactory, WalletCurrencyFactory>();
+            services.AddScoped<IBuyCurrencyValidator, BuyCurrencyValidator>();
+            services.AddScoped<ICantorCostsCalculator, CantorCostsCalculator>();
         }
 
         private void RegisterApplicationDependencies(IServiceCollection services)
         {
-            services.AddTransient<IRequestHandler<AuthenticateUserCommand, UserToken>, AuthenticateUserHandler>();
-            services.AddTransient<IRequestHandler<RegisterUserCommand, UserDto>, RegisterUserHandler>();
-            services.AddTransient<IRequestHandler<ChargeAccountCommand, UserDto>, ChargeAccountHandler>();
-            services.AddTransient<IRequestHandler<GetCantorCurrenciesQuery, IEnumerable<CantorCurrencyDto>>, GetCantorCurrenciesHandler>();
-            services.AddTransient<IRequestHandler<GetUserCurrenciesQuery, IEnumerable<UserCurrencyDto>>, GetUserCurrenciesHandler>();
-            services.AddTransient<IRequestHandler<BuyCurrencyCommandDto, UserDto>, BuyCurrencyHandler>();
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddTransient<ICurrentUserService, CurrentUserService>();
-            services.AddTransient<BuyCurrencyCommandMapper>();
-            services.AddTransient<CurrencyMapper>();
+            services.AddScoped<IRequestHandler<AuthenticateUserCommand, UserToken>, AuthenticateUserHandler>();
+            services.AddScoped<IRequestHandler<RegisterUserCommand, UserDto>, RegisterUserHandler>();
+            services.AddScoped<IRequestHandler<ChargeAccountCommand, UserDto>, ChargeAccountHandler>();
+            services.AddScoped<IRequestHandler<GetCantorCurrenciesQuery, IEnumerable<CantorCurrencyDto>>, GetCantorCurrenciesHandler>();
+            services.AddScoped<IRequestHandler<GetUserCurrenciesQuery, IEnumerable<UserCurrencyDto>>, GetUserCurrenciesHandler>();
+            services.AddScoped<IRequestHandler<BuyCurrencyCommandDto, UserDto>, BuyCurrencyHandler>();            
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
+            services.AddScoped<BuyCurrencyCommandMapper>();
+            services.AddScoped<CurrencyMapper>();
         }
     }
 }

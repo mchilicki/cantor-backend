@@ -17,34 +17,24 @@ namespace Chilicki.Cantor.Application.CommandHandlers.Buying
 {
     public class BuyCurrencyHandler : IRequestHandler<BuyCurrencyCommandDto, UserDto>
     {
-        readonly ICurrencyRepository currencyRepository;
-        readonly ICurrentUserService currentUserService;
         readonly IMapper mapper;
         readonly IBuyCurrencyService buyCurrencyService;
         readonly IUnitOfWork unitOfWork;
-        readonly IUserRepository userRepository;
 
         public BuyCurrencyHandler(
-            ICurrencyRepository currencyRepository,
-            ICurrentUserService currentUserService,
             IMapper mapper,
             IBuyCurrencyService buyCurrencyService,
-            IUnitOfWork unitOfWork,
-            IUserRepository userRepository)
+            IUnitOfWork unitOfWork)
         {
-            this.currencyRepository = currencyRepository;
-            this.currentUserService = currentUserService;
             this.mapper = mapper;
             this.buyCurrencyService = buyCurrencyService;
             this.unitOfWork = unitOfWork;
-            this.userRepository = userRepository;
         }
 
         public async Task<UserDto> Handle(BuyCurrencyCommandDto request, CancellationToken cancellationToken)
         {
             var command = mapper.Map<BuyCurrencyCommand>(request);
             var user = buyCurrencyService.BuyCurrency(command);
-            userRepository.Update(user);
             await unitOfWork.SaveAsync();
             return mapper.Map<UserDto>(user);
         }

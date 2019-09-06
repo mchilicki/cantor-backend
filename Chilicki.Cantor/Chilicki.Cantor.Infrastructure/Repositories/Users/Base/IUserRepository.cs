@@ -11,9 +11,6 @@ namespace Chilicki.Cantor.Infrastructure.Repositories.Users.Base
     public interface IUserRepository : IBaseRepository<User>
     {
         Task<User> FindByLoginOrEmailAndPassword(UserCredentials userCredentials);
-        Task<User> FindByLoginOrEmail(string loginOrEmail);
-        Task<User> FindByLogin(string login);
-        Task<User> FindByEmail(string email);
         Task<bool> DoesEmailAlreadyExists(string email);
         Task<bool> DoesLoginAlreadyExists(string login);
     }

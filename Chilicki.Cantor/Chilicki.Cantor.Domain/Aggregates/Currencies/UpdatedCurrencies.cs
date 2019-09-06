@@ -7,6 +7,6 @@ namespace Chilicki.Cantor.Domain.Aggregates.Currencies
     public class UpdatedCurrencies
     {
         public DateTime PublicationDate { get; set; }
-        public ICollection<Currency> Items { get; set; }
+        public virtual ICollection<Currency> Items { get; set; }
     }
 }

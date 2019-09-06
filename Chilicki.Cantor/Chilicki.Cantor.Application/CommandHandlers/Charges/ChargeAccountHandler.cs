@@ -21,30 +21,25 @@ namespace Chilicki.Cantor.Application.CommandHandlers.Charges
         readonly IChargeAccountService chargeAccountService;
         readonly IMapper mapper;
         readonly IUnitOfWork unitOfWork;
-        readonly IUserRepository userRepository;
 
         public ChargeAccountHandler(
             ICurrentUserService currentUserService,
             IChargeAccountService chargeAccountService,
             IMapper mapper,
-            IUnitOfWork unitOfWork,
-            IUserRepository userRepository)
+            IUnitOfWork unitOfWork)
         {
             this.currentUserService = currentUserService;
             this.chargeAccountService = chargeAccountService;
             this.mapper = mapper;
             this.unitOfWork = unitOfWork;
-            this.userRepository = userRepository;
         }
 
         public async Task<UserDto> Handle(ChargeAccountCommand request, CancellationToken cancellationToken)
         {
             var user = await currentUserService.GetCurrentUserAsync();
             user = chargeAccountService.ChargeUserAccount(user, request.Amount);
-            userRepository.Update(user);
             await unitOfWork.SaveAsync();
-            var userDto = mapper.Map<UserDto>(user);
-            return userDto;
+            return mapper.Map<UserDto>(user);
         }
     }
 }

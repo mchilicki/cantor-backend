@@ -21,23 +21,21 @@ namespace Chilicki.Cantor.Infrastructure.Repositories.Base
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            return await entities.ToListAsync();
+            return await entities.IncludeAll().ToListAsync();
         }
 
-        public async Task<TEntity> FindAsync(string key)
+        public async Task<TEntity> FindAsync(params Guid[] keyValues)
         {
-            var keyGuid = Guid.Parse(key);
-            return await entities.FindAsync(keyGuid);
+            if (keyValues.Count() > 1)
+                throw new InvalidOperationException("Wrong number of keyValues");
+            return await entities.IncludeAll().SingleOrDefaultAsync(p => p.Id == keyValues[0]);
         }
 
-        public async Task<TEntity> FindAsync(params object[] keyValues)
+        public TEntity Find(params Guid[] keyValues)
         {
-            return await entities.FindAsync(keyValues);
-        }
-
-        public TEntity Find(params object[] keyValues)
-        {
-            return entities.Find(keyValues);
+            if (keyValues.Count() > 1)
+                throw new InvalidOperationException("Wrong number of keyValues");
+            return entities.IncludeAll().SingleOrDefault(p => p.Id == keyValues[0]);
         }
 
         public async Task<TEntity> AddAsync(TEntity entity)
@@ -54,11 +52,6 @@ namespace Chilicki.Cantor.Infrastructure.Repositories.Base
         public async Task<int> GetCountAsync()
         {
             return await entities.CountAsync();
-        }
-
-        public void Update(TEntity entity)
-        {
-            entities.Update(entity);
         }
     }
 }
