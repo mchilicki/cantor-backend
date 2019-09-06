@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace Chilicki.Cantor.Infrastructure.Repositories.Cantors
 {
@@ -18,18 +19,21 @@ namespace Chilicki.Cantor.Infrastructure.Repositories.Cantors
 
         public async Task<CantorWallet> GetCantorWalletAsync()
         {
-            // TODO Including in EF Core needs including
-            return await entities
-                .Include(p => p.CantorCurrencies)
-                //.ThenInclude
+            return await GetCantorWalletQueryable()
                 .FirstOrDefaultAsync();
-        }
+        }        
 
         public CantorWallet GetCantorWallet()
         {
+            return GetCantorWalletQueryable()
+                .FirstOrDefault();
+        }
+
+        private IIncludableQueryable<CantorWallet, Currency> GetCantorWalletQueryable()
+        {
             return entities
                 .Include(p => p.CantorCurrencies)
-                .FirstOrDefault();
+                    .ThenInclude(p => p.Currency);
         }
     }
 }

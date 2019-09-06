@@ -15,5 +15,6 @@ namespace Chilicki.Cantor.Infrastructure.Repositories.Base
         Task<TEntity> AddAsync(TEntity entity);
         Task AddRangeAsync(IEnumerable<TEntity> entities);
         Task<int> GetCountAsync();
+        void Update(TEntity entity);
     }
 }

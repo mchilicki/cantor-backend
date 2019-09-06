@@ -55,5 +55,10 @@ namespace Chilicki.Cantor.Infrastructure.Repositories.Base
         {
             return await entities.CountAsync();
         }
+
+        public void Update(TEntity entity)
+        {
+            entities.Update(entity);
+        }
     }
 }

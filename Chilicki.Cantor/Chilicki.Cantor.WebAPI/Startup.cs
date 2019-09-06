@@ -61,6 +61,10 @@ using Chilicki.Cantor.Domain.Factories.Currencies.Base;
 using Chilicki.Cantor.Application.Mappers;
 using Chilicki.Cantor.Domain.Commands.Buying;
 using Chilicki.Cantor.Domain.Entities;
+using Chilicki.Cantor.Domain.Validators.Buying;
+using Chilicki.Cantor.Domain.Validators.Buying.Base;
+using Chilicki.Cantor.Domain.Services.Calculations.Base;
+using Chilicki.Cantor.Domain.Services.Calculations;
 
 namespace Chilicki.Cantor.WebAPI
 {
@@ -185,6 +189,8 @@ namespace Chilicki.Cantor.WebAPI
             services.AddTransient<IChargeAccountService, ChargeAccountService>();
             services.AddTransient<IBuyCurrencyService, BuyCurrencyService>();
             services.AddTransient<IWalletCurrencyFactory, WalletCurrencyFactory>();
+            services.AddTransient<IBuyCurrencyValidator, BuyCurrencyValidator>();
+            services.AddTransient<ICantorCostsCalculator, CantorCostsCalculator>();
         }
 
         private void RegisterApplicationDependencies(IServiceCollection services)
