@@ -35,7 +35,7 @@ namespace Chilicki.Cantor.Application.Mappers
             var cantorCurrency = cantorWalletRepository.GetCantorWallet().CantorCurrencies
                 .FindByCurrency(source.Currency.Id);
             var userMoneyCosts = cantorCostsCalculator.CountUserCostsInPln(currency, source.Amount);
-            var userBoughtCurrency = user.BoughtCurrencies.FindByCurrency(currency);
+            var userBoughtCurrency = user.Currencies.FindByCurrency(currency);
             return new BuyCurrencyCommand()
             {
                 Currency = currency,

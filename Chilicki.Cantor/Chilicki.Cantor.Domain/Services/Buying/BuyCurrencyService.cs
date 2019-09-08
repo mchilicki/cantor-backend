@@ -51,10 +51,10 @@ namespace Chilicki.Cantor.Domain.Services.Buying
 
         private void AddNewCurrency(BuyCurrencyCommand command)
         {
-            if (command.User.BoughtCurrencies == null)
-                command.User.BoughtCurrencies = new List<WalletCurrency>();
+            if (command.User.Currencies == null)
+                command.User.Currencies = new List<WalletCurrency>();
             var walletCurrency = walletCurrencyFactory.Create(command.Currency, command.User, command.Amount);
-            command.User.BoughtCurrencies.Add(walletCurrency);
+            command.User.Currencies.Add(walletCurrency);
         }
 
         private void EditCurrencyAmount(BuyCurrencyCommand command)

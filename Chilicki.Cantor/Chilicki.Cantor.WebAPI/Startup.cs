@@ -118,11 +118,12 @@ namespace Chilicki.Cantor.WebAPI
         private void ConfigureDatabase(IServiceCollection services)
         {
             var connectionString = Configuration.GetConnectionString("CantorDevelopment");
-            services.AddDbContext<DbContext, CantorDatabaseContext>(options =>
-                options.UseSqlServer(
+            services.AddDbContext<DbContext, CantorDatabaseContext>(options => options
+                .UseSqlServer(
                     connectionString, 
                     b => b.MigrationsAssembly(typeof(CantorDatabaseContext).Assembly.GetName().Name
                 ))
+                .UseLazyLoadingProxies()
             );
         }
 
@@ -206,6 +207,7 @@ namespace Chilicki.Cantor.WebAPI
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddScoped<IBuyCurrencyCommandMapper, BuyCurrencyCommandMapper>();
             services.AddScoped<CurrencyMapper>();
+            services.AddScoped<CurrencyValueMapper>();
         }
     }
 }

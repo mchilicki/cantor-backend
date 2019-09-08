@@ -14,6 +14,6 @@ namespace Chilicki.Cantor.Domain.Entities
         public string LastName { get; set; }
         public string Token { get; set; }
         public decimal Money { get; set; }
-        public virtual ICollection<WalletCurrency> BoughtCurrencies { get; set; }
+        public virtual ICollection<WalletCurrency> Currencies { get; set; }
     }
 }

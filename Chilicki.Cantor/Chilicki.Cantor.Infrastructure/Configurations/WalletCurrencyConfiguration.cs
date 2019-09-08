@@ -14,7 +14,7 @@ namespace Chilicki.Cantor.Infrastructure.Configurations
         {
             builder
                 .HasOne(p => p.Owner)
-                .WithMany(p => p.BoughtCurrencies)
+                .WithMany(p => p.Currencies)
                 .HasForeignKey("OwnerId")
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
