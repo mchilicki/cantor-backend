@@ -4,15 +4,23 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Chilicki.Cantor
 {
-    public static class WebApiDIConfiguration
+    public class WebApiDIConfiguration
     {
-        public static void RegisterAspWebApiDependencies(this IServiceCollection services, IConfiguration configuration)
+        readonly IConfiguration configuration;
+
+        public WebApiDIConfiguration(
+            IConfiguration configuration)
+        {
+            this.configuration = configuration;
+        }
+
+        public void RegisterAspWebApiDependencies(IServiceCollection services)
         {            
-            services.RegisterAspWebApiServices();
+            RegisterAspWebApiServices(services);
             services.RegisterAllDependencies(configuration);
         }
 
-        private static void RegisterAspWebApiServices(this IServiceCollection services)
+        private void RegisterAspWebApiServices(IServiceCollection services)
         {
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
         }        

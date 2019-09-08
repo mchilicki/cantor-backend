@@ -14,6 +14,7 @@ namespace Chilicki.Cantor.WebAPI
         MediatRConfiguration MediatRConfiguration { get; }
         JwtAuthenticationConfiguration JwtAuthenticationConfiguration { get; }
         AutomapperConfiguration AutomapperConfiguration { get; }
+        WebApiDIConfiguration WebApiDIConfiguration { get; }
 
         public Startup(IConfiguration configuration,
             IHostingEnvironment hostingEnvironment)
@@ -24,14 +25,15 @@ namespace Chilicki.Cantor.WebAPI
             MediatRConfiguration = new MediatRConfiguration();
             JwtAuthenticationConfiguration = new JwtAuthenticationConfiguration(configuration);
             AutomapperConfiguration = new AutomapperConfiguration();
+            WebApiDIConfiguration = new WebApiDIConfiguration(configuration);
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
             MvcConfiguration.Configure(services);
             MediatRConfiguration.Configure(services);
-            JwtAuthenticationConfiguration.Configure(services);            
-            services.RegisterAspWebApiDependencies(Configuration);
+            JwtAuthenticationConfiguration.Configure(services);
+            WebApiDIConfiguration.RegisterAspWebApiDependencies(services);
             AutomapperConfiguration.ConfigureAutomapper(services);
         }        
 
