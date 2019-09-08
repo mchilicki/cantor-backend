@@ -6,6 +6,8 @@ using Chilicki.Cantor.Domain.Commands.Buying;
 using Chilicki.Cantor.Domain.Entities;
 using Chilicki.Cantor.Domain.Services.Calculations.Base;
 using Chilicki.Cantor.Infrastructure.Repositories.Cantors.Base;
+using Chilicki.Cantor.Infrastructure.Repositories.Currencies.Base;
+using System.Threading.Tasks;
 
 namespace Chilicki.Cantor.Application.Mappers
 {
@@ -14,26 +16,26 @@ namespace Chilicki.Cantor.Application.Mappers
         readonly ICurrentUserService currentUserService;
         readonly ICantorWalletRepository cantorWalletRepository;
         readonly ICantorCostsCalculator cantorCostsCalculator;
-        readonly IMapper mapper;
+        readonly ICurrencyRepository currencyRepository;
 
         public BuyCurrencyCommandMapper(
             ICurrentUserService currentUserService,
             ICantorWalletRepository cantorWalletRepository,
             ICantorCostsCalculator cantorCostsCalculator,
-            IMapper mapper)
+            ICurrencyRepository currencyRepository)
         {
             this.currentUserService = currentUserService;
             this.cantorWalletRepository = cantorWalletRepository;
             this.cantorCostsCalculator = cantorCostsCalculator;
-            this.mapper = mapper;
+            this.currencyRepository = currencyRepository;
         }
 
-        public BuyCurrencyCommand Map(BuyCurrencyCommandDto source)
+        public async Task<BuyCurrencyCommand> Map(BuyCurrencyCommandDto source)
         {
-            var currency = mapper.Map<Currency>(source.Currency);
-            var user = currentUserService.GetCurrentUser();
+            var currency = await currencyRepository.FindAsync(source.CurrencyId);
+            var user = await currentUserService.GetCurrentUserAsync();
             var cantorCurrency = cantorWalletRepository.GetCantorWallet().CantorCurrencies
-                .FindByCurrency(source.Currency.Id);
+                .FindByCurrency(source.CurrencyId);
             var userMoneyCosts = cantorCostsCalculator.CountUserCostsInPln(currency, source.Amount);
             var userBoughtCurrency = user.Currencies.FindByCurrency(currency);
             return new BuyCurrencyCommand()

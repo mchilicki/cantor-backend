@@ -8,7 +8,7 @@ namespace Chilicki.Cantor.Application.Commands.Buying
 {
     public class BuyCurrencyCommandDto : IRequest<UserDto>
     {
-        public UserCurrencyDto Currency { get; set; }
+        public Guid CurrencyId { get; set; }
         public int Amount { get; set; }
     }
 }

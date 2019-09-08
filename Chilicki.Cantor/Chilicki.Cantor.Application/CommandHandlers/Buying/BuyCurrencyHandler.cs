@@ -37,7 +37,7 @@ namespace Chilicki.Cantor.Application.CommandHandlers.Buying
 
         public async Task<UserDto> Handle(BuyCurrencyCommandDto request, CancellationToken cancellationToken)
         {
-            var command = buyCurrencyCommandMapper.Map(request);
+            var command = await buyCurrencyCommandMapper.Map(request);
             var user = buyCurrencyService.BuyCurrency(command);
             await unitOfWork.SaveAsync();
             return mapper.Map<UserDto>(user);
