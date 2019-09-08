@@ -1,9 +1,5 @@
 ﻿using Chilicki.Cantor.Infrastructure.RestClients.Base;
-using System;
-using System.Collections.Generic;
 using RestSharp;
-using Chilicki.Cantor.Domain.Entities;
-using Chilicki.Cantor.Domain.Aggregates;
 using Chilicki.Cantor.Infrastructure.RestClients.Helpers;
 using Chilicki.Cantor.Domain.Aggregates.Currencies;
 using Chilicki.Cantor.Domain.Helpers.Exceptions.Currencies;

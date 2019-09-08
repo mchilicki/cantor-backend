@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Chilicki.Cantor.Domain.ValueObjects.Users
+﻿namespace Chilicki.Cantor.Domain.ValueObjects.Users
 {
     public class UserToRegister
     {

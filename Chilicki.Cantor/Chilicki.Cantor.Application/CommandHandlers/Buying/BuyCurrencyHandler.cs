@@ -1,16 +1,10 @@
 ﻿using AutoMapper;
 using Chilicki.Cantor.Application.Commands.Buying;
 using Chilicki.Cantor.Application.DTOs;
-using Chilicki.Cantor.Application.Helpers.Users.Base;
 using Chilicki.Cantor.Application.Mappers.Base;
-using Chilicki.Cantor.Domain.Commands.Buying;
 using Chilicki.Cantor.Domain.Services.Buying.Base;
-using Chilicki.Cantor.Infrastructure.Repositories.Currencies.Base;
-using Chilicki.Cantor.Infrastructure.Repositories.Users.Base;
 using Chilicki.Cantor.Infrastructure.UnitsOfWork;
 using MediatR;
-using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 

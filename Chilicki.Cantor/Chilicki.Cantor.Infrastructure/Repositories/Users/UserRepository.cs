@@ -3,10 +3,6 @@ using Chilicki.Cantor.Domain.ValueObjects.Users;
 using Chilicki.Cantor.Infrastructure.Repositories.Base;
 using Chilicki.Cantor.Infrastructure.Repositories.Users.Base;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Chilicki.Cantor.Infrastructure.Repositories.Users

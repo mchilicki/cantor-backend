@@ -1,8 +1,5 @@
 ﻿using Chilicki.Cantor.Domain.ValueObjects.Users;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Chilicki.Cantor.Application.Commands.Auth
 {

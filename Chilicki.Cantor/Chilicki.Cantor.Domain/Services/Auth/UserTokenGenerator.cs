@@ -1,9 +1,7 @@
-﻿using Chilicki.Cantor.Application.Configurations.Auth;
-using Chilicki.Cantor.Domain.Entities;
+﻿using Chilicki.Cantor.Domain.Entities;
 using Chilicki.Cantor.Domain.Services.Auth.Base;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;

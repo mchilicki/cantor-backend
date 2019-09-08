@@ -1,7 +1,5 @@
 ﻿using Chilicki.Cantor.Domain.Entities;
 using Chilicki.Cantor.Domain.Factories.Currencies.Base;
-using System;
-using System.Collections.Generic;
 
 namespace Chilicki.Cantor.Domain.Factories.Currencies
 {

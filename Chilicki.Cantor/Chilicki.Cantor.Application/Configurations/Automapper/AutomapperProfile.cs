@@ -1,16 +1,10 @@
 ﻿using AutoMapper;
 using Chilicki.Cantor.Application.Commands.Auth;
-using Chilicki.Cantor.Application.Commands.Buying;
 using Chilicki.Cantor.Application.DTOs;
 using Chilicki.Cantor.Application.DTOs.Currencies;
 using Chilicki.Cantor.Application.Mappers;
-using Chilicki.Cantor.Domain.Commands.Buying;
 using Chilicki.Cantor.Domain.Entities;
 using Chilicki.Cantor.Domain.ValueObjects.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Chilicki.Cantor.Application.Configurations.Automapper
 {

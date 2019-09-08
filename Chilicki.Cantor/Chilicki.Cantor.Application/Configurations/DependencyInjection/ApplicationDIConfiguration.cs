@@ -16,10 +16,8 @@ using Chilicki.Cantor.Application.Queries;
 using Chilicki.Cantor.Application.QueryHandlers;
 using Chilicki.Cantor.Domain.ValueObjects.Users;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Collections.Generic;
 
 namespace Chilicki.Cantor

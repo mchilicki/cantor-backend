@@ -1,9 +1,6 @@
 ﻿using Chilicki.Cantor.Domain.Commands.Buying;
 using Chilicki.Cantor.Domain.Helpers.Exceptions.Buying;
 using Chilicki.Cantor.Domain.Validators.Buying.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Chilicki.Cantor.Domain.Validators.Buying
 {

@@ -1,9 +1,7 @@
-﻿using Chilicki.Cantor.Domain.Aggregates;
-using Chilicki.Cantor.Domain.Aggregates.Currencies;
+﻿using Chilicki.Cantor.Domain.Aggregates.Currencies;
 using Chilicki.Cantor.Domain.Entities;
 using Chilicki.Cantor.Domain.Helpers.Exceptions.Currencies;
 using Chilicki.Cantor.Domain.Services.Currencies.Base;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 

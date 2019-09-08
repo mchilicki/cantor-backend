@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Chilicki.Cantor.Application.DTOs.Currencies
+﻿namespace Chilicki.Cantor.Application.DTOs.Currencies
 {
     public class CantorCurrencyDto : CurrencyDto
     {

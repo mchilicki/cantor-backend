@@ -2,9 +2,6 @@
 using Chilicki.Cantor.Application.DTOs.Currencies;
 using Chilicki.Cantor.Domain.Entities;
 using Chilicki.Cantor.Infrastructure.Repositories.Currencies.Base;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Chilicki.Cantor.Application.Mappers
 {

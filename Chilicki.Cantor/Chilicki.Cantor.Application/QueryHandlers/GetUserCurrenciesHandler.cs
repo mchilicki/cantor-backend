@@ -2,11 +2,8 @@
 using Chilicki.Cantor.Application.DTOs.Currencies;
 using Chilicki.Cantor.Application.Helpers.Users.Base;
 using Chilicki.Cantor.Application.Queries;
-using Chilicki.Cantor.Infrastructure.Repositories.Users.Base;
 using Chilicki.Cantor.Infrastructure.Repositories.Wallets.Base;
 using MediatR;
-using Microsoft.AspNetCore.Http;
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;

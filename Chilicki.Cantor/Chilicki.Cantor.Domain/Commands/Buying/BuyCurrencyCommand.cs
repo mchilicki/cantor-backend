@@ -1,6 +1,4 @@
 ﻿using Chilicki.Cantor.Domain.Entities;
-using System;
-using System.Collections.Generic;
 
 namespace Chilicki.Cantor.Domain.Commands.Buying
 {

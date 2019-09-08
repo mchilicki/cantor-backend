@@ -3,9 +3,7 @@ using Chilicki.Cantor.Domain.Entities;
 using Chilicki.Cantor.Domain.Factories.Currencies.Base;
 using Chilicki.Cantor.Domain.Services.Buying.Base;
 using Chilicki.Cantor.Domain.Validators.Buying.Base;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Chilicki.Cantor.Domain.Services.Buying
 {

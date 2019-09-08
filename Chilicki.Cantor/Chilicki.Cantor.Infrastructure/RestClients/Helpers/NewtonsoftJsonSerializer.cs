@@ -1,6 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using RestSharp.Deserializers;
 
 namespace Chilicki.Cantor.Infrastructure.RestClients.Helpers

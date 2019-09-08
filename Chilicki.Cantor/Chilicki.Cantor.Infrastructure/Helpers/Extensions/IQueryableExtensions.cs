@@ -1,7 +1,5 @@
 ﻿using Chilicki.Cantor.Domain.Entities.Base;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Chilicki.Cantor

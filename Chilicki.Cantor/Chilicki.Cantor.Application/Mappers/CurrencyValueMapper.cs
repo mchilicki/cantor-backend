@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using Chilicki.Cantor.Application.DTOs.Currencies;
 using Chilicki.Cantor.Domain.Entities;
-using System;
-using System.Collections.Generic;
 
 namespace Chilicki.Cantor.Application.Mappers
 {

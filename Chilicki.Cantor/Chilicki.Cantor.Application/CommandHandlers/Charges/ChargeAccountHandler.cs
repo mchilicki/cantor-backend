@@ -3,13 +3,8 @@ using Chilicki.Cantor.Application.Commands.Charges;
 using Chilicki.Cantor.Application.DTOs;
 using Chilicki.Cantor.Application.Helpers.Users.Base;
 using Chilicki.Cantor.Domain.Services.Charges.Base;
-using Chilicki.Cantor.Infrastructure.Repositories.Users.Base;
 using Chilicki.Cantor.Infrastructure.UnitsOfWork;
 using MediatR;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 

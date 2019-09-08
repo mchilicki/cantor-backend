@@ -3,12 +3,6 @@ using Chilicki.Cantor.Domain.Factories.Users.Base;
 using Chilicki.Cantor.Domain.Services.Auth.Base;
 using Chilicki.Cantor.Domain.Services.Users.Base;
 using Chilicki.Cantor.Domain.ValueObjects.Users;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 
 namespace Chilicki.Cantor.Domain.Services.Users
 {

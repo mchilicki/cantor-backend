@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using Chilicki.Cantor.Application.DTOs.Currencies;
 using Chilicki.Cantor.Application.Queries;
-using Chilicki.Cantor.Infrastructure.Repositories.Cantors.Base;
 using Chilicki.Cantor.Infrastructure.Repositories.Currencies.Base;
 using MediatR;
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;

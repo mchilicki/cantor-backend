@@ -1,9 +1,7 @@
-﻿using AutoMapper;
-using Chilicki.Cantor.Application.Commands.Buying;
+﻿using Chilicki.Cantor.Application.Commands.Buying;
 using Chilicki.Cantor.Application.Helpers.Users.Base;
 using Chilicki.Cantor.Application.Mappers.Base;
 using Chilicki.Cantor.Domain.Commands.Buying;
-using Chilicki.Cantor.Domain.Entities;
 using Chilicki.Cantor.Domain.Services.Calculations.Base;
 using Chilicki.Cantor.Infrastructure.Repositories.Cantors.Base;
 using Chilicki.Cantor.Infrastructure.Repositories.Currencies.Base;

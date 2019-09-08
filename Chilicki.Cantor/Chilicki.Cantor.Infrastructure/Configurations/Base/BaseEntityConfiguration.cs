@@ -1,9 +1,6 @@
 ﻿using Chilicki.Cantor.Domain.Entities.Base;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Chilicki.Cantor.Infrastructure.Configurations.Base
 {

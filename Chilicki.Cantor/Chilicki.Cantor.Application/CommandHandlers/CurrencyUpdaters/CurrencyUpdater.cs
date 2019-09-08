@@ -1,5 +1,4 @@
 ﻿using Chilicki.Cantor.Application.CommandHandlers.CurrencyUpdaters.Base;
-using Chilicki.Cantor.Domain.Aggregates;
 using Chilicki.Cantor.Domain.Aggregates.Currencies;
 using Chilicki.Cantor.Domain.Entities;
 using Chilicki.Cantor.Domain.Factories.Initializing.Base;
@@ -8,9 +7,6 @@ using Chilicki.Cantor.Infrastructure.Repositories.Cantors.Base;
 using Chilicki.Cantor.Infrastructure.Repositories.Currencies.Base;
 using Chilicki.Cantor.Infrastructure.RestClients.Base;
 using Chilicki.Cantor.Infrastructure.UnitsOfWork;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Chilicki.Cantor.Application.CommandHandlers.CurrencyUpdaters

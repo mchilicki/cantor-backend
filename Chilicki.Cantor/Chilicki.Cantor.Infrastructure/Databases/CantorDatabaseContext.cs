@@ -1,10 +1,5 @@
-﻿using Chilicki.Cantor.Domain.Entities;
-using Chilicki.Cantor.Infrastructure.Configurations;
+﻿using Chilicki.Cantor.Infrastructure.Configurations;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Chilicki.Cantor.Infrastructure.Databases
 {
