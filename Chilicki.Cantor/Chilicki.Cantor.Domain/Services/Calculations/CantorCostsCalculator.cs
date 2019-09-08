@@ -7,7 +7,7 @@ namespace Chilicki.Cantor.Domain.Services.Calculations
     {
         public decimal CountUserCostsInPln(Currency currency, int amount)
         {
-            var userCostsInPln = amount * currency.SellPrice;
+            var userCostsInPln = amount * currency.SellPrice / currency.Unit;
             return userCostsInPln;
         }
     }
