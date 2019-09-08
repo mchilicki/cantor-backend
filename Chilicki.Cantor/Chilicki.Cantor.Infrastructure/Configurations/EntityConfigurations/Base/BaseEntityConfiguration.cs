@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Chilicki.Cantor.Infrastructure.Configurations.Base
+namespace Chilicki.Cantor.Infrastructure.Configurations.EntityConfigurations.Base
 {
     public abstract class BaseEntityConfiguration<TEntity> : IEntityTypeConfiguration<TEntity> where TEntity : BaseEntity
     {

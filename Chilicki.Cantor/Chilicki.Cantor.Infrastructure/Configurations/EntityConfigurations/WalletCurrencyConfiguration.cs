@@ -1,9 +1,9 @@
 ﻿using Chilicki.Cantor.Domain.Entities;
-using Chilicki.Cantor.Infrastructure.Configurations.Base;
+using Chilicki.Cantor.Infrastructure.Configurations.EntityConfigurations.Base;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Chilicki.Cantor.Infrastructure.Configurations
+namespace Chilicki.Cantor.Infrastructure.Configurations.EntityConfigurations
 {
     public class WalletCurrencyConfiguration : BaseEntityConfiguration<WalletCurrency>
     {

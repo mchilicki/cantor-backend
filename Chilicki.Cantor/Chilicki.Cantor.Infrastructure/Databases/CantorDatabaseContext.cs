@@ -1,4 +1,4 @@
-﻿using Chilicki.Cantor.Infrastructure.Configurations;
+﻿using Chilicki.Cantor.Infrastructure.Configurations.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace Chilicki.Cantor.Infrastructure.Databases
