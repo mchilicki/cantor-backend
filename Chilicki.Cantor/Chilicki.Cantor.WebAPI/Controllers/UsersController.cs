@@ -1,32 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Chilicki.Cantor.Application.Commands.Auth;
+using Chilicki.Cantor.Application.Commands.Charges;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Chilicki.Cantor.WebAPI.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
-        readonly IMediator _mediator;
+        readonly IMediator mediator;
 
         public UsersController(IMediator mediator)
         {
-            _mediator = mediator;
+            this.mediator = mediator;
         }
 
-        //[AllowAnonymous]
+        [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody]UserAuthenticateCommand command)
+        public async Task<IActionResult> Authenticate([FromBody]AuthenticateUserCommand command)
         {
-            var response = _mediator.Send(command);
+            var response = await mediator.Send(command);
+            return Ok(response);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody]RegisterUserCommand command)
+        {
+            var response = await mediator.Send(command);
+            return Ok(response);
+        }
+
+        [HttpPost("charge")]
+        public async Task<IActionResult> ChargeAccount([FromBody]ChargeAccountCommand command)
+        {
+            var response = await mediator.Send(command);
             return Ok(response);
         }
     }

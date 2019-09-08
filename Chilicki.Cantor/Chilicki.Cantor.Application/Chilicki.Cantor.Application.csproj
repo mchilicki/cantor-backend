@@ -5,11 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Queries\" />
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="MediatR" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="7.0.0" />
+    <ProjectReference Include="..\Chilicki.Cantor.Domain\Chilicki.Cantor.Domain.csproj" />
+    <ProjectReference Include="..\Chilicki.Cantor.Infrastructure\Chilicki.Cantor.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Http.Abstractions">
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.http.abstractions\2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
