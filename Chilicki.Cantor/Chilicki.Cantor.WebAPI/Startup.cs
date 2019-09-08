@@ -65,6 +65,7 @@ using Chilicki.Cantor.Domain.Validators.Buying;
 using Chilicki.Cantor.Domain.Validators.Buying.Base;
 using Chilicki.Cantor.Domain.Services.Calculations.Base;
 using Chilicki.Cantor.Domain.Services.Calculations;
+using Chilicki.Cantor.Application.Mappers.Base;
 
 namespace Chilicki.Cantor.WebAPI
 {
@@ -203,7 +204,7 @@ namespace Chilicki.Cantor.WebAPI
             services.AddScoped<IRequestHandler<GetUserCurrenciesQuery, IEnumerable<UserCurrencyDto>>, GetUserCurrenciesHandler>();
             services.AddScoped<IRequestHandler<BuyCurrencyCommandDto, UserDto>, BuyCurrencyHandler>();            
             services.AddScoped<ICurrentUserService, CurrentUserService>();
-            services.AddScoped<BuyCurrencyCommandMapper>();
+            services.AddScoped<IBuyCurrencyCommandMapper, BuyCurrencyCommandMapper>();
             services.AddScoped<CurrencyMapper>();
         }
     }

@@ -19,5 +19,10 @@ namespace Chilicki.Cantor.Infrastructure.UnitsOfWork
         {
             await _context.SaveChangesAsync();
         }
+
+        public void Dispose()
+        {
+            _context.Dispose();
+        }
     }
 }

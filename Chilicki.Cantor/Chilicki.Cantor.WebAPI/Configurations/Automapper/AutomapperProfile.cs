@@ -29,8 +29,6 @@ namespace Chilicki.Cantor.WebAPI.Configurations.Automapper
             CreateMap<Currency, UserCurrencyDto>();
             CreateMap<UserCurrencyDto, Currency>()
                 .ConvertUsing<CurrencyMapper>();
-            CreateMap<BuyCurrencyCommandDto, BuyCurrencyCommand>()
-                .ConvertUsing<BuyCurrencyCommandMapper>();
         }
     }
 }
