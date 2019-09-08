@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Chilicki.Cantor.WebAPI.Configurations.Automapper
+namespace Chilicki.Cantor.Application.Configurations.Automapper
 {
     public class AutomapperProfile : Profile
     {

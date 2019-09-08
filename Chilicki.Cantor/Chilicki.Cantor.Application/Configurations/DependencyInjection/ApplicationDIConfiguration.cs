@@ -17,6 +17,7 @@ using Chilicki.Cantor.Application.QueryHandlers;
 using Chilicki.Cantor.Domain.ValueObjects.Users;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -25,9 +26,9 @@ namespace Chilicki.Cantor
 {
     public static class ApplicationDIConfiguration
     {
-        public static IServiceCollection RegisterAllDependencies(this IServiceCollection services, string databaseConnectionString)
+        public static IServiceCollection RegisterAllDependencies(this IServiceCollection services, IConfiguration configuration)
         {
-            services.RegisterInfrastructureDependencies(databaseConnectionString);
+            services.RegisterInfrastructureDependencies(configuration);
             services.RegisterDomainDependencies();
             services.RegisterApplicationDependencies();
             return services;

@@ -24,13 +24,12 @@ namespace Chilicki.Cantor
 {
     public static class InfrastructureDIConfiguration
     {
-        public static void RegisterInfrastructureDependencies(
-            this IServiceCollection services, string databaseConnectionString)
+        public static void RegisterInfrastructureDependencies(this IServiceCollection services, IConfiguration configuration)
         {
             services.RegisterRepositories();
             services.RegisterBaseRepositories();
             services.RegisterRestClients();
-            services.RegisterDatabase(databaseConnectionString);
+            services.RegisterDatabase(configuration);
         }
 
         private static void RegisterRepositories(this IServiceCollection services)
@@ -53,8 +52,9 @@ namespace Chilicki.Cantor
             services.AddScoped<ICurrencyUpdaterRestClient, CurrencyUpdaterRestClient>();
         }
 
-        private static void RegisterDatabase(this IServiceCollection services, string databaseConnectionString)
+        private static void RegisterDatabase(this IServiceCollection services, IConfiguration configuration)
         {
+            var databaseConnectionString = configuration.GetConnectionString("Cantor");
             services.AddDbContext<DbContext, CantorDatabaseContext>(options => options
                 .UseSqlServer(
                     databaseConnectionString,

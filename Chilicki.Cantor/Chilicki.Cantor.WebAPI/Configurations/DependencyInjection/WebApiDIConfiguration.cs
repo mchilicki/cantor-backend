@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -9,10 +10,10 @@ namespace Chilicki.Cantor
 {
     public static class WebApiDIConfiguration
     {
-        public static void RegisterAspWebApiDependencies(this IServiceCollection services, string databaseConnectionString)
+        public static void RegisterAspWebApiDependencies(this IServiceCollection services, IConfiguration configuration)
         {            
             services.RegisterAspWebApiServices();
-            services.RegisterAllDependencies(databaseConnectionString);
+            services.RegisterAllDependencies(configuration);
         }
 
         private static void RegisterAspWebApiServices(this IServiceCollection services)

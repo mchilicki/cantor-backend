@@ -10,14 +10,19 @@ namespace Chilicki.Cantor.CurrencyUpdater.Configurations.DependencyInjection
 {
     public class CurrencyUpdaterDIConfiguration
     {
+        readonly AutomapperConfiguration automapperConfiguration;
+
+        public CurrencyUpdaterDIConfiguration()
+        {
+            automapperConfiguration = new AutomapperConfiguration();
+        }
+
         public IServiceProvider CreateServiceProvider(IConfigurationRoot configuration)
         {
-            var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-            var databaseConnectionString = configuration.GetConnectionString(environmentName);
-            var serviceProvider = new ServiceCollection()
-                .RegisterAllDependencies(databaseConnectionString)
-               .BuildServiceProvider();
-            return serviceProvider;
+            var services = new ServiceCollection()
+                .RegisterAllDependencies(configuration);
+            automapperConfiguration.ConfigureAutomapper(services);
+            return services.BuildServiceProvider();
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Chilicki.Cantor.WebAPI.Configurations.Automapper
+namespace Chilicki.Cantor.Application.Configurations.Automapper
 {
     public static class AutomapperExtensions
     {

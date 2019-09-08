@@ -13,7 +13,7 @@ namespace Chilicki.Cantor.CurrencyUpdater.Configurations.HostConfigurations
             var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
             var builder = new ConfigurationBuilder()
                 .AddJsonFile($"appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{environmentName}.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{environmentName}.json", optional: false, reloadOnChange: true)
                 .AddEnvironmentVariables();
             var configuration = builder.Build();            
             return configuration;
