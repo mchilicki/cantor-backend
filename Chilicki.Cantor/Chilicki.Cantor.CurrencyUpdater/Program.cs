@@ -1,4 +1,5 @@
 ﻿using Chilicki.Cantor.Application.CommandHandlers.CurrencyUpdaters.Base;
+using Chilicki.Cantor.CurrencyUpdater.Configurations.DependencyInjection;
 using Chilicki.Cantor.Domain.Factories.Initializing;
 using Chilicki.Cantor.Domain.Factories.Initializing.Base;
 using Chilicki.Cantor.Domain.Services.Currencies;
@@ -27,7 +28,7 @@ namespace Chilicki.Cantor.CurrencyUpdater
 
         static async Task MainAsync(string[] args)
         {
-            var serviceProvider = CreateDependencyInjection();
+            var serviceProvider = new CurrencyUpdaterDIConfiguration().CreateServiceProvider();
             var currencyUpdater = serviceProvider.GetService<ICurrencyUpdater>();
             int waitingTimeInMiliseconds = 1000;
             await UpdateInLoop(currencyUpdater, waitingTimeInMiliseconds);
@@ -61,28 +62,6 @@ namespace Chilicki.Cantor.CurrencyUpdater
                 Console.WriteLine("Currencies updated");
             else
                 Console.WriteLine("Currencies were not updated");
-        }
-
-        static ServiceProvider CreateDependencyInjection()
-        {
-            var connectionString = "data source=localhost;initial catalog=CantorDevelopment;integrated security=True;MultipleActiveResultSets=True;";
-            var serviceProvider = new ServiceCollection()
-               .AddTransient<ICurrencyUpdater, Application.CommandHandlers.CurrencyUpdaters.CurrencyUpdater>()
-               .AddTransient<ICurrencyRepository, CurrencyRepository>()
-               .AddTransient<ICantorWalletRepository, CantorWalletRepository>()
-               .AddTransient<ICantorCurrencyRepository, CantorCurrencyRepository>()
-               .AddTransient<ICurrencyUpdateService, CurrencyUpdateService>()
-               .AddTransient<IInitializeCurrenciesFactory, InitializeCurrenciesFactory>()
-               .AddTransient<ICurrencyUpdaterRestClient, CurrencyUpdaterRestClient>()
-               .AddTransient<IUnitOfWork, UnitOfWork>()
-               .AddDbContext<DbContext, CantorDatabaseContext>(options =>
-                options.UseSqlServer(
-                    connectionString,
-                    b => b.MigrationsAssembly(typeof(CantorDatabaseContext).Assembly.GetName().Name
-                    ))
-                )
-               .BuildServiceProvider();
-            return serviceProvider;
         }
     }
 }

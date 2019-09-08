@@ -84,7 +84,7 @@ namespace Chilicki.Cantor.WebAPI
             ConfigureMediatR(services);
             ConfigureDatabase(services);
             ConfigureJWTAuthentication(services);            
-            RegisterDependencies(services);
+            services.RegisterAspWebApiDependencies();
             ConfigureAutomapper(services);
         }        
 
@@ -164,50 +164,6 @@ namespace Chilicki.Cantor.WebAPI
             services.AddSingleton(mapper);
         }
 
-        private void RegisterDependencies(IServiceCollection services)
-        {
-            RegisterInfrastructureDependencies(services);
-            RegisterDomainDependencies(services);
-            RegisterApplicationDependencies(services);
-        }        
-
-        private void RegisterInfrastructureDependencies(IServiceCollection services)
-        {
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IBaseRepository<BaseEntity>, BaseRepository<BaseEntity>>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<ICantorCurrencyRepository, CantorCurrencyRepository>();
-            services.AddScoped<ICantorWalletRepository, CantorWalletRepository>();
-            services.AddScoped<ICurrencyRepository, CurrencyRepository>();
-            services.AddScoped<IWalletCurrencyRepository, WalletCurrencyRepository>();
-        }
-
-        private void RegisterDomainDependencies(IServiceCollection services)
-        {
-            services.AddScoped<IUserFactory, UserFactory>();
-            services.AddScoped<IUserTokenFactory, UserTokenFactory>();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IUserTokenGenerator, UserTokenGenerator>();
-            services.AddScoped<IChargeAccountService, ChargeAccountService>();
-            services.AddScoped<IBuyCurrencyService, BuyCurrencyService>();
-            services.AddScoped<IWalletCurrencyFactory, WalletCurrencyFactory>();
-            services.AddScoped<IBuyCurrencyValidator, BuyCurrencyValidator>();
-            services.AddScoped<ICantorCostsCalculator, CantorCostsCalculator>();
-        }
-
-        private void RegisterApplicationDependencies(IServiceCollection services)
-        {
-            services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<IRequestHandler<AuthenticateUserCommand, UserToken>, AuthenticateUserHandler>();
-            services.AddScoped<IRequestHandler<RegisterUserCommand, UserDto>, RegisterUserHandler>();
-            services.AddScoped<IRequestHandler<ChargeAccountCommand, UserDto>, ChargeAccountHandler>();
-            services.AddScoped<IRequestHandler<GetCantorCurrenciesQuery, IEnumerable<CantorCurrencyDto>>, GetCantorCurrenciesHandler>();
-            services.AddScoped<IRequestHandler<GetUserCurrenciesQuery, IEnumerable<UserCurrencyDto>>, GetUserCurrenciesHandler>();
-            services.AddScoped<IRequestHandler<BuyCurrencyCommandDto, UserDto>, BuyCurrencyHandler>();            
-            services.AddScoped<ICurrentUserService, CurrentUserService>();
-            services.AddScoped<IBuyCurrencyCommandMapper, BuyCurrencyCommandMapper>();
-            services.AddScoped<CurrencyMapper>();
-            services.AddScoped<CurrencyValueMapper>();
-        }
+           
     }
 }
