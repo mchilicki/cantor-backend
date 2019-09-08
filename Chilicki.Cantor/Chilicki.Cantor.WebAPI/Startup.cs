@@ -71,20 +71,22 @@ namespace Chilicki.Cantor.WebAPI
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        IConfiguration Configuration { get; }
+        IHostingEnvironment HostingEnvironment { get; }
+
+        public Startup(IConfiguration configuration,
+            IHostingEnvironment hostingEnvironment)
         {
             Configuration = configuration;
+            HostingEnvironment = hostingEnvironment;
         }
-
-        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
             ConfigureMVC(services);
             ConfigureMediatR(services);
-            ConfigureDatabase(services);
             ConfigureJWTAuthentication(services);            
-            services.RegisterAspWebApiDependencies();
+            services.RegisterAspWebApiDependencies(GetConnectionString());
             ConfigureAutomapper(services);
         }        
 
@@ -113,19 +115,7 @@ namespace Chilicki.Cantor.WebAPI
         private static void ConfigureMediatR(IServiceCollection services)
         {
             services.AddMediatR(assemblies: typeof(Startup).Assembly);
-        }
-
-        private void ConfigureDatabase(IServiceCollection services)
-        {
-            var connectionString = Configuration.GetConnectionString("CantorDevelopment");
-            services.AddDbContext<DbContext, CantorDatabaseContext>(options => options
-                .UseSqlServer(
-                    connectionString, 
-                    b => b.MigrationsAssembly(typeof(CantorDatabaseContext).Assembly.GetName().Name
-                ))
-                .UseLazyLoadingProxies()
-            );
-        }
+        }        
 
         private void ConfigureJWTAuthentication(IServiceCollection services)
         {
@@ -164,6 +154,11 @@ namespace Chilicki.Cantor.WebAPI
             services.AddSingleton(mapper);
         }
 
-           
+        private string GetConnectionString()
+        {
+            string environmentName = HostingEnvironment.EnvironmentName;
+            var databaseConnectionString = Configuration.GetConnectionString(environmentName);
+            return databaseConnectionString;
+        }
     }
 }

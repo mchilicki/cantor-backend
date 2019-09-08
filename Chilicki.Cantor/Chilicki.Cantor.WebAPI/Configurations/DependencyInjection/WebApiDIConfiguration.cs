@@ -9,15 +9,15 @@ namespace Chilicki.Cantor
 {
     public static class WebApiDIConfiguration
     {
-        public static void RegisterAspWebApiDependencies(this IServiceCollection services)
+        public static void RegisterAspWebApiDependencies(this IServiceCollection services, string databaseConnectionString)
         {            
             services.RegisterAspWebApiServices();
-            services.RegisterAllDependencies();
+            services.RegisterAllDependencies(databaseConnectionString);
         }
 
         private static void RegisterAspWebApiServices(this IServiceCollection services)
         {
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
-        }
+        }        
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Chilicki.Cantor.Domain.Entities.Base;
+using Chilicki.Cantor.Infrastructure.Databases;
 using Chilicki.Cantor.Infrastructure.Repositories.Base;
 using Chilicki.Cantor.Infrastructure.Repositories.Cantors;
 using Chilicki.Cantor.Infrastructure.Repositories.Cantors.Base;
@@ -11,7 +12,11 @@ using Chilicki.Cantor.Infrastructure.Repositories.Wallets.Base;
 using Chilicki.Cantor.Infrastructure.RestClients;
 using Chilicki.Cantor.Infrastructure.RestClients.Base;
 using Chilicki.Cantor.Infrastructure.UnitsOfWork;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Hosting.Internal;
 using System;
 using System.Collections.Generic;
 
@@ -19,11 +24,13 @@ namespace Chilicki.Cantor
 {
     public static class InfrastructureDIConfiguration
     {
-        public static void RegisterInfrastructureDependencies(this IServiceCollection services)
+        public static void RegisterInfrastructureDependencies(
+            this IServiceCollection services, string databaseConnectionString)
         {
             services.RegisterRepositories();
             services.RegisterBaseRepositories();
             services.RegisterRestClients();
+            services.RegisterDatabase(databaseConnectionString);
         }
 
         private static void RegisterRepositories(this IServiceCollection services)
@@ -44,6 +51,17 @@ namespace Chilicki.Cantor
         private static void RegisterRestClients(this IServiceCollection services)
         {
             services.AddScoped<ICurrencyUpdaterRestClient, CurrencyUpdaterRestClient>();
+        }
+
+        private static void RegisterDatabase(this IServiceCollection services, string databaseConnectionString)
+        {
+            services.AddDbContext<DbContext, CantorDatabaseContext>(options => options
+                .UseSqlServer(
+                    databaseConnectionString,
+                    b => b.MigrationsAssembly(typeof(CantorDatabaseContext).Assembly.GetName().Name
+                ))
+                .UseLazyLoadingProxies()
+            );
         }
     }
 }

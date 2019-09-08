@@ -25,9 +25,9 @@ namespace Chilicki.Cantor
 {
     public static class ApplicationDIConfiguration
     {
-        public static IServiceCollection RegisterAllDependencies(this IServiceCollection services)
+        public static IServiceCollection RegisterAllDependencies(this IServiceCollection services, string databaseConnectionString)
         {
-            services.RegisterInfrastructureDependencies();
+            services.RegisterInfrastructureDependencies(databaseConnectionString);
             services.RegisterDomainDependencies();
             services.RegisterApplicationDependencies();
             return services;

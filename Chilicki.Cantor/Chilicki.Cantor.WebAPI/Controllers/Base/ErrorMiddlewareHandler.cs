@@ -30,12 +30,13 @@ namespace Chilicki.Cantor.WebAPI.Controllers.Base
             }
         }
 
-        private static Task HandleExceptionAsync(HttpContext context, Exception exception)
+        private Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             var code = HttpStatusCode.InternalServerError;
-            if (exception is UnathorizedException) code = HttpStatusCode.Unauthorized;
-            else if (exception is BadRequestException) code = HttpStatusCode.BadRequest;
-
+            if (exception is UnathorizedException)
+                code = HttpStatusCode.Unauthorized;
+            else if (exception is BadRequestException)
+                code = HttpStatusCode.BadRequest;
             var errorDto = new ErrorDto()
             {
                 Error = exception.Message
