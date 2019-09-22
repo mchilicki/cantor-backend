@@ -1,22 +1,24 @@
-﻿using Chilicki.Cantor.Application.Commands.Buying;
+﻿using Chilicki.Cantor.Application.Commands.Selling;
 using Chilicki.Cantor.Application.Helpers.Users.Base;
-using Chilicki.Cantor.Application.Mappers.Base;
-using Chilicki.Cantor.Domain.Commands.Buying;
+using Chilicki.Cantor.Application.Mappers.Selling.Base;
+using Chilicki.Cantor.Domain.Commands.Selling;
 using Chilicki.Cantor.Domain.Services.Calculations.Base;
 using Chilicki.Cantor.Infrastructure.Repositories.Cantors.Base;
 using Chilicki.Cantor.Infrastructure.Repositories.Currencies.Base;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Chilicki.Cantor.Application.Mappers
+namespace Chilicki.Cantor.Application.Mappers.Selling
 {
-    public class BuyCurrencyCommandMapper : IBuyCurrencyCommandMapper
+    public class SellCurrencyCommandMapper : ISellCurrencyCommandMapper
     {
         readonly ICurrentUserService currentUserService;
         readonly ICantorWalletRepository cantorWalletRepository;
         readonly ICantorCostsCalculator cantorCostsCalculator;
         readonly ICurrencyRepository currencyRepository;
 
-        public BuyCurrencyCommandMapper(
+        public SellCurrencyCommandMapper(
             ICurrentUserService currentUserService,
             ICantorWalletRepository cantorWalletRepository,
             ICantorCostsCalculator cantorCostsCalculator,
@@ -28,21 +30,21 @@ namespace Chilicki.Cantor.Application.Mappers
             this.currencyRepository = currencyRepository;
         }
 
-        public async Task<BuyCurrencyCommand> Map(BuyCurrencyCommandDto source)
+        public async Task<SellCurrencyCommand> Map(SellCurrencyCommandDto source)
         {
             var currency = await currencyRepository.FindAsync(source.CurrencyId);
             var user = await currentUserService.GetCurrentUserAsync();
             var cantorCurrency = cantorWalletRepository.GetCantorWallet().CantorCurrencies
                 .FindByCurrency(source.CurrencyId);
-            var userMoneyCosts = cantorCostsCalculator.CountUserCostsInPln(currency, source.Amount);
+            var userMoneyEarns = cantorCostsCalculator.CountUserEarnsInPln(currency, source.Amount);
             var userBoughtCurrency = user.Currencies.FindByCurrency(currency);
-            return new BuyCurrencyCommand()
+            return new SellCurrencyCommand()
             {
                 Currency = currency,
                 Amount = source.Amount,
                 User = user,
                 CantorCurrency = cantorCurrency,
-                UserMoneyCosts = userMoneyCosts,
+                UserMoneyEarns = userMoneyEarns,
                 UserCurrency = userBoughtCurrency,
             };
         }

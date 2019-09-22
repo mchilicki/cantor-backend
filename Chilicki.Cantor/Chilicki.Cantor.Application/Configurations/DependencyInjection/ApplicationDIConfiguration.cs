@@ -3,15 +3,19 @@ using Chilicki.Cantor.Application.CommandHandlers.Buying;
 using Chilicki.Cantor.Application.CommandHandlers.Charges;
 using Chilicki.Cantor.Application.CommandHandlers.CurrencyUpdaters;
 using Chilicki.Cantor.Application.CommandHandlers.CurrencyUpdaters.Base;
+using Chilicki.Cantor.Application.CommandHandlers.Selling;
 using Chilicki.Cantor.Application.Commands.Auth;
 using Chilicki.Cantor.Application.Commands.Buying;
 using Chilicki.Cantor.Application.Commands.Charges;
+using Chilicki.Cantor.Application.Commands.Selling;
 using Chilicki.Cantor.Application.DTOs;
 using Chilicki.Cantor.Application.DTOs.Currencies;
 using Chilicki.Cantor.Application.Helpers.Users;
 using Chilicki.Cantor.Application.Helpers.Users.Base;
 using Chilicki.Cantor.Application.Mappers;
 using Chilicki.Cantor.Application.Mappers.Base;
+using Chilicki.Cantor.Application.Mappers.Selling;
+using Chilicki.Cantor.Application.Mappers.Selling.Base;
 using Chilicki.Cantor.Application.Queries;
 using Chilicki.Cantor.Application.QueryHandlers;
 using Chilicki.Cantor.Domain.ValueObjects.Users;
@@ -47,11 +51,13 @@ namespace Chilicki.Cantor
             services.AddScoped<IRequestHandler<GetCantorCurrenciesQuery, IEnumerable<CantorCurrencyDto>>, GetCantorCurrenciesHandler>();
             services.AddScoped<IRequestHandler<GetUserCurrenciesQuery, IEnumerable<UserCurrencyDto>>, GetUserCurrenciesHandler>();
             services.AddScoped<IRequestHandler<BuyCurrencyCommandDto, UserDto>, BuyCurrencyHandler>();
+            services.AddScoped<IRequestHandler<SellCurrencyCommandDto, UserDto>, SellCurrencyHandler>();
         }
 
         private static void RegisterMappers(this IServiceCollection services)
         {
             services.AddScoped<IBuyCurrencyCommandMapper, BuyCurrencyCommandMapper>();
+            services.AddScoped<ISellCurrencyCommandMapper, SellCurrencyCommandMapper>();
             services.AddScoped<CurrencyMapper>();
             services.AddScoped<CurrencyValueMapper>();
         }

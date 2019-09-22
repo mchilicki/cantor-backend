@@ -10,5 +10,11 @@ namespace Chilicki.Cantor.Domain.Services.Calculations
             var userCostsInPln = amount * currency.SellPrice / currency.Unit;
             return userCostsInPln;
         }
+
+        public decimal CountUserEarnsInPln(Currency currency, int amount)
+        {
+            var userCostsInPln = amount * currency.PurchasePrice / currency.Unit;
+            return userCostsInPln;
+        }
     }
 }
