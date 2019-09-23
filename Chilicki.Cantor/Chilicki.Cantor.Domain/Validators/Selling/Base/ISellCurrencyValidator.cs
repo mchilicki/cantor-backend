@@ -4,6 +4,6 @@ namespace Chilicki.Cantor.Domain.Validators.Selling.Base
 {
     public interface ISellCurrencyValidator
     {
-        void ValidateCanSellCurrency(SellCurrencyCommand command);
+        bool ValidateCanSellCurrency(SellCurrencyCommand command);
     }
 }

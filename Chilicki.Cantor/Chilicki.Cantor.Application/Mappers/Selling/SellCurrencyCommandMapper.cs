@@ -34,7 +34,8 @@ namespace Chilicki.Cantor.Application.Mappers.Selling
         {
             var currency = await currencyRepository.FindAsync(source.CurrencyId);
             var user = await currentUserService.GetCurrentUserAsync();
-            var cantorCurrency = cantorWalletRepository.GetCantorWallet().CantorCurrencies
+            var cantorWallet = cantorWalletRepository.GetCantorWallet();
+            var cantorCurrency = cantorWallet.CantorCurrencies
                 .FindByCurrency(source.CurrencyId);
             var userMoneyEarns = cantorCostsCalculator.CountUserEarnsInPln(currency, source.Amount);
             var userBoughtCurrency = user.Currencies.FindByCurrency(currency);
@@ -43,6 +44,7 @@ namespace Chilicki.Cantor.Application.Mappers.Selling
                 Currency = currency,
                 Amount = source.Amount,
                 User = user,
+                CantorWallet = cantorWallet,
                 CantorCurrency = cantorCurrency,
                 UserMoneyEarns = userMoneyEarns,
                 UserCurrency = userBoughtCurrency,

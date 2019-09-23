@@ -22,6 +22,8 @@ using Chilicki.Cantor.Domain.Validators.Buying;
 using Chilicki.Cantor.Domain.Validators.Buying.Base;
 using Chilicki.Cantor.Domain.Validators.Selling;
 using Chilicki.Cantor.Domain.Validators.Selling.Base;
+using Chilicki.Cantor.Domain.Validators.Transactions;
+using Chilicki.Cantor.Domain.Validators.Transactions.Base;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Chilicki.Cantor
@@ -58,6 +60,7 @@ namespace Chilicki.Cantor
         {
             services.AddScoped<IBuyCurrencyValidator, BuyCurrencyValidator>();
             services.AddScoped<ISellCurrencyValidator, SellCurrencyValidator>();
+            services.AddScoped<ITransactionValidator, TransactionValidator>();
         }
     }
 }
