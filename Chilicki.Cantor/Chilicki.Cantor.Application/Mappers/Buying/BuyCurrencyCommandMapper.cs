@@ -1,23 +1,21 @@
-﻿using Chilicki.Cantor.Application.Commands.Selling;
+﻿using Chilicki.Cantor.Application.Commands.Buying;
 using Chilicki.Cantor.Application.Helpers.Users.Base;
-using Chilicki.Cantor.Application.Mappers.Selling.Base;
+using Chilicki.Cantor.Application.Mappers.Base;
 using Chilicki.Cantor.Application.Mappers.Transactions.Base;
-using Chilicki.Cantor.Domain.Commands.Selling;
+using Chilicki.Cantor.Domain.Commands.Buying;
 using Chilicki.Cantor.Domain.Services.Calculations.Base;
 using Chilicki.Cantor.Infrastructure.Repositories.Cantors.Base;
 using Chilicki.Cantor.Infrastructure.Repositories.Currencies.Base;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Chilicki.Cantor.Application.Mappers.Selling
+namespace Chilicki.Cantor.Application.Mappers.Buying
 {
-    public class SellCurrencyCommandMapper : ISellCurrencyCommandMapper
+    public class BuyCurrencyCommandMapper : IBuyCurrencyCommandMapper
     {
         readonly ICantorCostsCalculator cantorCostsCalculator;
         readonly ITransactionCommandMapper transactionCommandMapper;
 
-        public SellCurrencyCommandMapper(
+        public BuyCurrencyCommandMapper(
             ICantorCostsCalculator cantorCostsCalculator,
             ITransactionCommandMapper transactionCommandMapper)
         {
@@ -25,10 +23,10 @@ namespace Chilicki.Cantor.Application.Mappers.Selling
             this.transactionCommandMapper = transactionCommandMapper;
         }
 
-        public async Task<SellCurrencyCommand> Map(SellCurrencyCommandDto source)
+        public async Task<BuyCurrencyCommand> Map(BuyCurrencyCommandDto source)
         {
-            var command = await transactionCommandMapper.Map<SellCurrencyCommand>(source);
-            command.UserMoneyEarns = cantorCostsCalculator.CountUserEarnsInPln(command.Currency, source.Amount);
+            var command = await transactionCommandMapper.Map<BuyCurrencyCommand>(source);
+            command.UserMoneyCosts = cantorCostsCalculator.CountUserCostsInPln(command.Currency, source.Amount);
             return command;
         }
     }

@@ -3,7 +3,7 @@ using Chilicki.Cantor.Application.DTOs.Currencies;
 using Chilicki.Cantor.Domain.Entities;
 using Chilicki.Cantor.Infrastructure.Repositories.Currencies.Base;
 
-namespace Chilicki.Cantor.Application.Mappers
+namespace Chilicki.Cantor.Application.Mappers.Currencies
 {
     public class CurrencyMapper : ITypeConverter<UserCurrencyDto, Currency>
     {

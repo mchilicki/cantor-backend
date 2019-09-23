@@ -3,6 +3,7 @@ using Chilicki.Cantor.Application.Commands.Auth;
 using Chilicki.Cantor.Application.DTOs;
 using Chilicki.Cantor.Application.DTOs.Currencies;
 using Chilicki.Cantor.Application.Mappers;
+using Chilicki.Cantor.Application.Mappers.Currencies;
 using Chilicki.Cantor.Domain.Entities;
 using Chilicki.Cantor.Domain.ValueObjects.Users;
 

@@ -14,8 +14,12 @@ using Chilicki.Cantor.Application.Helpers.Users;
 using Chilicki.Cantor.Application.Helpers.Users.Base;
 using Chilicki.Cantor.Application.Mappers;
 using Chilicki.Cantor.Application.Mappers.Base;
+using Chilicki.Cantor.Application.Mappers.Buying;
+using Chilicki.Cantor.Application.Mappers.Currencies;
 using Chilicki.Cantor.Application.Mappers.Selling;
 using Chilicki.Cantor.Application.Mappers.Selling.Base;
+using Chilicki.Cantor.Application.Mappers.Transactions;
+using Chilicki.Cantor.Application.Mappers.Transactions.Base;
 using Chilicki.Cantor.Application.Queries;
 using Chilicki.Cantor.Application.QueryHandlers;
 using Chilicki.Cantor.Domain.ValueObjects.Users;
@@ -58,6 +62,7 @@ namespace Chilicki.Cantor
         {
             services.AddScoped<IBuyCurrencyCommandMapper, BuyCurrencyCommandMapper>();
             services.AddScoped<ISellCurrencyCommandMapper, SellCurrencyCommandMapper>();
+            services.AddScoped<ITransactionCommandMapper, TransactionCommandMapper>();
             services.AddScoped<CurrencyMapper>();
             services.AddScoped<CurrencyValueMapper>();
         }

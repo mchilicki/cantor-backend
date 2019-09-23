@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Chilicki.Cantor.Domain.Commands.Base
 {
-    public abstract class TransactionCommand
+    public class TransactionCommand
     {
         public virtual Currency Currency { get; set; }
         public virtual User User { get; set; }
