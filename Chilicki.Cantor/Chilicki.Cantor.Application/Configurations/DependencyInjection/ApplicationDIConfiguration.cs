@@ -53,7 +53,7 @@ namespace Chilicki.Cantor
             services.AddScoped<IRequestHandler<RegisterUserCommand, UserDto>, RegisterUserHandler>();
             services.AddScoped<IRequestHandler<ChargeAccountCommand, UserDto>, ChargeAccountHandler>();
             services.AddScoped<IRequestHandler<GetCantorCurrenciesQuery, IEnumerable<CantorCurrencyDto>>, GetCantorCurrenciesHandler>();
-            services.AddScoped<IRequestHandler<GetUserCurrenciesQuery, IEnumerable<UserCurrencyDto>>, GetUserCurrenciesHandler>();
+            services.AddScoped<IRequestHandler<GetUserCurrenciesQuery, UserDto>, GetUserCurrenciesHandler>();
             services.AddScoped<IRequestHandler<BuyCurrencyCommandDto, UserDto>, BuyCurrencyHandler>();
             services.AddScoped<IRequestHandler<SellCurrencyCommandDto, UserDto>, SellCurrencyHandler>();
         }
