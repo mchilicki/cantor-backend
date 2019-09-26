@@ -12,6 +12,7 @@ namespace Chilicki.Cantor.Application.DTOs
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public decimal Money { get; set; }
+        public string Token { get; set; }
         public IEnumerable<UserCurrencyDto> Currencies { get; set; }
     }
 }

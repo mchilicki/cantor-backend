@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Chilicki.Cantor.Application.Commands.Auth;
 using Chilicki.Cantor.Application.Configurations.Auth;
+using Chilicki.Cantor.Application.DTOs;
 using Chilicki.Cantor.Domain.Entities;
 using Chilicki.Cantor.Domain.Helpers.Exceptions.Users;
 using Chilicki.Cantor.Domain.Services.Users.Base;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Chilicki.Cantor.Application.CommandHandlers.Auth
 {
-    public class AuthenticateUserHandler : IRequestHandler<AuthenticateUserCommand, UserToken>
+    public class AuthenticateUserHandler : IRequestHandler<AuthenticateUserCommand, UserDto>
     {
         readonly IUserRepository userRepository;
         readonly IMapper mapper;
@@ -36,7 +37,7 @@ namespace Chilicki.Cantor.Application.CommandHandlers.Auth
             this.unitOfWork = unitOfWork;
         }
 
-        public async Task<UserToken> Handle(AuthenticateUserCommand request, CancellationToken cancellationToken)
+        public async Task<UserDto> Handle(AuthenticateUserCommand request, CancellationToken cancellationToken)
         {
             var secretKey = GetConfigurationSecretKey();
             var userCredentials = mapper.Map<UserCredentials>(request);
@@ -45,7 +46,7 @@ namespace Chilicki.Cantor.Application.CommandHandlers.Auth
             var userToken = userService.GenerateUserToken(user, secretKey);
             var authenticatedUser = userService.UpdateUserToken(user, userToken);
             await unitOfWork.SaveAsync();
-            return userToken;
+            return mapper.Map<UserDto>(authenticatedUser);
         }
 
         private bool ShouldUserBeAuthenticated(User user)

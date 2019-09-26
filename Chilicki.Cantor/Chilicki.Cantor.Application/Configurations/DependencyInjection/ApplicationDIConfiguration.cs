@@ -49,7 +49,7 @@ namespace Chilicki.Cantor
 
         private static void RegisterRequestHandlers(this IServiceCollection services)
         {
-            services.AddScoped<IRequestHandler<AuthenticateUserCommand, UserToken>, AuthenticateUserHandler>();
+            services.AddScoped<IRequestHandler<AuthenticateUserCommand, UserDto>, AuthenticateUserHandler>();
             services.AddScoped<IRequestHandler<RegisterUserCommand, UserDto>, RegisterUserHandler>();
             services.AddScoped<IRequestHandler<ChargeAccountCommand, UserDto>, ChargeAccountHandler>();
             services.AddScoped<IRequestHandler<GetCantorCurrenciesQuery, IEnumerable<CantorCurrencyDto>>, GetCantorCurrenciesHandler>();
