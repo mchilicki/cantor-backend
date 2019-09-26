@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Chilicki.Cantor.WebAPI.Controllers.Base;
+using Chilicki.Cantor.WebAPI.Configurations.Cors;
 
 namespace Chilicki.Cantor.WebAPI
 {
@@ -15,6 +16,7 @@ namespace Chilicki.Cantor.WebAPI
         JwtAuthenticationConfiguration JwtAuthenticationConfiguration { get; }
         AutomapperConfiguration AutomapperConfiguration { get; }
         WebApiDIConfiguration WebApiDIConfiguration { get; }
+        CorsConfiguration CorsConfiguration { get; }
 
         public Startup(IConfiguration configuration,
             IHostingEnvironment hostingEnvironment)
@@ -26,10 +28,12 @@ namespace Chilicki.Cantor.WebAPI
             JwtAuthenticationConfiguration = new JwtAuthenticationConfiguration(configuration);
             AutomapperConfiguration = new AutomapperConfiguration();
             WebApiDIConfiguration = new WebApiDIConfiguration(configuration);
+            CorsConfiguration = new CorsConfiguration();
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
+            CorsConfiguration.Configure(services);
             MvcConfiguration.Configure(services);
             MediatRConfiguration.Configure(services);
             JwtAuthenticationConfiguration.Configure(services);
@@ -51,6 +55,7 @@ namespace Chilicki.Cantor.WebAPI
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseMiddleware(typeof(ErrorMiddlewareHandler));
+            app.UseCors("AllowAll");
             app.UseMvc();
         }
     }
