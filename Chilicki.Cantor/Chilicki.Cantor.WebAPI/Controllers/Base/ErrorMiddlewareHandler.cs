@@ -22,9 +22,9 @@ namespace Chilicki.Cantor.WebAPI.Controllers.Base
             {
                 await next(context);
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                await HandleExceptionAsync(context, ex);
+                await HandleExceptionAsync(context, exception);
             }
         }
 

@@ -14,10 +14,16 @@ using Chilicki.Cantor.Domain.Services.Charges;
 using Chilicki.Cantor.Domain.Services.Charges.Base;
 using Chilicki.Cantor.Domain.Services.Currencies;
 using Chilicki.Cantor.Domain.Services.Currencies.Base;
+using Chilicki.Cantor.Domain.Services.Selling;
+using Chilicki.Cantor.Domain.Services.Selling.Base;
 using Chilicki.Cantor.Domain.Services.Users;
 using Chilicki.Cantor.Domain.Services.Users.Base;
 using Chilicki.Cantor.Domain.Validators.Buying;
 using Chilicki.Cantor.Domain.Validators.Buying.Base;
+using Chilicki.Cantor.Domain.Validators.Selling;
+using Chilicki.Cantor.Domain.Validators.Selling.Base;
+using Chilicki.Cantor.Domain.Validators.Transactions;
+using Chilicki.Cantor.Domain.Validators.Transactions.Base;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Chilicki.Cantor
@@ -39,6 +45,7 @@ namespace Chilicki.Cantor
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserTokenGenerator, UserTokenGenerator>();
             services.AddScoped<ICurrencyUpdateService, CurrencyUpdateService>();
+            services.AddScoped<ISellCurrencyService, SellCurrencyService>();
         }
 
         private static void RegisterFactories(this IServiceCollection services)
@@ -52,6 +59,8 @@ namespace Chilicki.Cantor
         private static void RegisterValidators(this IServiceCollection services)
         {
             services.AddScoped<IBuyCurrencyValidator, BuyCurrencyValidator>();
+            services.AddScoped<ISellCurrencyValidator, SellCurrencyValidator>();
+            services.AddScoped<ITransactionValidator, TransactionValidator>();
         }
     }
 }

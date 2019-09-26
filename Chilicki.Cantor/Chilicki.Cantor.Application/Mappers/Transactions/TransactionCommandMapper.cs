@@ -1,49 +1,47 @@
-﻿using Chilicki.Cantor.Application.Commands.Buying;
+﻿using Chilicki.Cantor.Application.Commands.Transactions;
 using Chilicki.Cantor.Application.Helpers.Users.Base;
-using Chilicki.Cantor.Application.Mappers.Base;
-using Chilicki.Cantor.Domain.Commands.Buying;
-using Chilicki.Cantor.Domain.Services.Calculations.Base;
+using Chilicki.Cantor.Application.Mappers.Transactions.Base;
+using Chilicki.Cantor.Domain.Commands.Base;
 using Chilicki.Cantor.Infrastructure.Repositories.Cantors.Base;
 using Chilicki.Cantor.Infrastructure.Repositories.Currencies.Base;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Chilicki.Cantor.Application.Mappers
+namespace Chilicki.Cantor.Application.Mappers.Transactions
 {
-    public class BuyCurrencyCommandMapper : IBuyCurrencyCommandMapper
+    public class TransactionCommandMapper : ITransactionCommandMapper
     {
         readonly ICurrentUserService currentUserService;
         readonly ICantorWalletRepository cantorWalletRepository;
-        readonly ICantorCostsCalculator cantorCostsCalculator;
         readonly ICurrencyRepository currencyRepository;
 
-        public BuyCurrencyCommandMapper(
+        public TransactionCommandMapper(
             ICurrentUserService currentUserService,
             ICantorWalletRepository cantorWalletRepository,
-            ICantorCostsCalculator cantorCostsCalculator,
             ICurrencyRepository currencyRepository)
         {
             this.currentUserService = currentUserService;
             this.cantorWalletRepository = cantorWalletRepository;
-            this.cantorCostsCalculator = cantorCostsCalculator;
             this.currencyRepository = currencyRepository;
         }
 
-        public async Task<BuyCurrencyCommand> Map(BuyCurrencyCommandDto source)
+        public async Task<T> Map<T>(TransactionCommandDto source) where T: TransactionCommand, new()
         {
             var currency = await currencyRepository.FindAsync(source.CurrencyId);
             var user = await currentUserService.GetCurrentUserAsync();
-            var cantorCurrency = cantorWalletRepository.GetCantorWallet().CantorCurrencies
+            var cantorWallet = cantorWalletRepository.GetCantorWallet();
+            var cantorCurrency = cantorWallet.CantorCurrencies
                 .FindByCurrency(source.CurrencyId);
-            var userMoneyCosts = cantorCostsCalculator.CountUserCostsInPln(currency, source.Amount);
             var userBoughtCurrency = user.Currencies.FindByCurrency(currency);
-            return new BuyCurrencyCommand()
+            return new T()
             {
                 Currency = currency,
                 Amount = source.Amount,
                 User = user,
+                CantorWallet = cantorWallet,
                 CantorCurrency = cantorCurrency,
-                UserMoneyCosts = userMoneyCosts,
-                UserBoughtCurrency = userBoughtCurrency,
+                UserCurrency = userBoughtCurrency,
             };
         }
     }

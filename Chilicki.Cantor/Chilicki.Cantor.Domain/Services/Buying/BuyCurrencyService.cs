@@ -41,7 +41,7 @@ namespace Chilicki.Cantor.Domain.Services.Buying
 
         private void AddOrUpdateUserCurrencyAmount(BuyCurrencyCommand command)
         {
-            if (command.UserBoughtCurrency == null)
+            if (command.UserCurrency == null)
                 AddNewCurrency(command);
             else
                 EditCurrencyAmount(command);
@@ -51,13 +51,13 @@ namespace Chilicki.Cantor.Domain.Services.Buying
         {
             if (command.User.Currencies == null)
                 command.User.Currencies = new List<WalletCurrency>();
-            var walletCurrency = walletCurrencyFactory.Create(command.Currency, command.User, command.Amount);
-            command.User.Currencies.Add(walletCurrency);
+            var userCurrency = walletCurrencyFactory.Create(command.Currency, command.User, command.Amount);
+            command.User.Currencies.Add(userCurrency);
         }
 
         private void EditCurrencyAmount(BuyCurrencyCommand command)
         {
-            command.UserBoughtCurrency.Amount += command.Amount;
+            command.UserCurrency.Amount += command.Amount;
         }        
     }
 }
